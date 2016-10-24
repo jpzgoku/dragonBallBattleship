@@ -1,0 +1,222 @@
+body {
+	background-color: black;
+}
+ul, li {
+	padding: 0;
+	margin: 0;
+}
+ul {
+	position: relative;
+	margin: auto;
+	text-align: center;
+}
+li {
+	display: inline-block;
+	padding: 0 10px;
+}
+#header {
+	margin: 50px 0 25px;
+}
+#newCharacterSelect {
+	display: none;
+}
+.menu {
+	background-color: transparent;
+	border: none;
+	color: white;
+	font-size: 20px;
+	letter-spacing: 2px;
+	padding: 0 30px;
+}
+.menu:hover {
+	color: #ffff00;
+}
+#heroSelect, #villianSelect {
+	width: 960px;
+	position: relative;
+	text-align: center;
+	display: none;
+	margin: auto;
+	border-spacing: 0;
+}
+#heroSelect img, #villianSelect img {
+	position: relative;
+	bottom: -5px;
+}
+#goku, #vegeta, #trunks {
+	background-color: #00ffff;
+}
+#piccolo {
+	background-color:#00ce00;
+}
+#gohan {
+	background-color: #ffff00;
+}
+#tien {
+	background-color: white;
+}
+#black {
+	background-color: #ffc0cb;
+}
+#frieza {
+	background-color: #ffe76A;
+}
+#buu {
+	background-color: #ff94ce;
+}
+#cell {
+	background-color: #00ff00;
+}
+#android20 {
+	background-color: #ffa500;
+}
+#frost {
+	background-color: #e9e9e9;
+}
+div#board {
+	position: relative;
+	width: 1024px;
+	height: 863px;
+	margin: auto;
+}
+div#messageAreaPlayer1 {
+	padding-top: 40px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	font-size: 21px;
+}
+div#messageAreaPlayer2 {
+	padding-top: 40px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 21px;
+}
+.gokuMessageBoard, .vegetaMessageBoard, .trunksMessageBoard {
+	color: #00ffff;
+}
+.gokuGameBoard, .vegetaGameBoard, .trunksGameBoard {
+	background-color: #00ffff;
+}
+.piccoloMessageBoard {
+	color: #00ce00;
+}
+.piccoloGameBoard {
+	background-color: #00ce00;
+}
+.gohanMessageBoard, .gotenMessageBoard {
+	color: #ffff00;
+}
+.gohanGameBoard, .gotenGameBoard {
+	background-color: #ffff00;
+}
+.tienMessageBoard {
+	color: white;
+}
+.tienGameBoard {
+	background-color: white;
+}
+.shenronMessageBoard {
+	color: #00b200;
+}
+.shenronGameBoard {
+	background-color: #00b200;
+}
+.blackMessageBoard {
+	color: #ffc0cb;
+}
+.blackGameBoard {
+	background-color: #ffc0cb;
+}
+.freizaMessageBoard {
+	color: #ffe76a;
+}
+.freizaGameBoard {
+	background-color: #ffe76a;
+}
+.kidBuuMessageBoard, .superBuuMessageBoard {
+	color: #ff94ce;
+}
+.kidBuuGameBoard, .superBuuGameBoard {
+	background-color: #ff94ce;
+}
+.cellMessageBoard {
+	color: #00ff00;
+}
+.cellGameBoard {
+	background-color: #00ff00;
+}
+.cellJrMessageBoard {
+	color: #48b3e7;
+}
+.cellJrGameBoard {
+	background-color: #48b3e7;
+}
+.frostMessageBoard {
+	color: #e9e9e9;
+}
+.frostGameBoard {
+	background-color: #e9e9e9;
+}
+.android19MessageBoard {
+	color: #ffe166;
+}
+.android19GameBoard {
+	background-color: #ffe166;
+}
+.android20MessageBoard {
+	color: #ffa500;
+}
+.android20GameBoard {
+	background-color: #ffa500;
+}
+#left {
+	position: absolute;
+	left: 122px;
+	top: 98px;
+	border-spacing: 0;
+}
+#right {
+	position: absolute;
+	right: 122px;
+	top: 98px;
+	border-spacing: 0;
+}
+td {
+	width: 74px;
+	height: 74px;
+	border: 1px solid black;
+}
+#left button, #right button {
+	color: transparent;
+	background-color: transparent;
+	width: 73px;
+	height: 73px;
+	border: none;
+}
+#left button:hover {
+	background-color: #00e5e5;
+}
+#right button:hover {
+	background-color: #590059;
+}
+#imgPlayer1 {
+	position: fixed;
+	bottom: 0;
+	left: -35px;
+}
+#imgPlayer2 {
+	position: fixed;
+	bottom: 0;
+	right: -35px;
+}
+.hit {
+	background: url("../images/hit.png") no-repeat center center;
+}
+.miss {
+	background: url("../images/miss.png") no-repeat center center;
+}
+.shade {
+	background-color: black;
+}

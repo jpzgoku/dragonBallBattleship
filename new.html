@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Dragon Ball Styles Test</title>
+		<meta charset="uft-8">
+		<link href= "css/new.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery-3.1.0.min.js"></script>
+	</head>
+	<body>
+		<div id="header">
+			<ul id="numPlayerSelect">
+				<li><button id="1Player" class="menu">1 Player</button></li>
+				<li><button  id="2Player" class="menu">2 Player</button></li>
+			</ul>	
+			<ul id="newCharacterSelect">
+				<li><button id="player1CS" class="menu">Character Select</button></li>
+				<li><button id="clear" class="menu">New Game</button></li>
+				<li><button id="player2CS" class="menu">Character Select</button></li>
+			</ul>
+		</div>
+		<table id="heroSelect">
+			<tr>
+				<td id="goku"><img src="images/gokuBlue.png"></td>
+				<td id="piccolo"><img src="images/piccolo.png"></td>
+				<td id="vegeta"><img src="images/vegetaBlue2.png"></td>
+			</tr>
+			<tr>
+				<td id="gohan"><img src="images/gohan.png"></td>
+				<td id="trunks"><img src="images/trunks.png"></td>
+				<td id="tien"><img src="images/tien.png"></td>
+			</tr>
+		</table>
+		<table id="villianSelect">
+			<tr>
+				<td id="frieza"><img src="images/goldenFrieza.png"></td>
+				<td id="black"><img src="images/blackAngry.png"></td>
+				<td id="buu"><img src="images/buu.png"></td>
+			</tr>
+			<tr>
+				<td id="cell"><img src="images/cell.png"></td>
+				<td id="android20"><img src="images/android20Stare.png"></td>
+				<td id="frost"><img src="images/frostForm1.png"></td>
+			</tr>
+		</table>
+		<div id="board">
+			<div id="messageAreaPlayer1"></div>
+			<div id="messageAreaPlayer2"></div>
+			<table id="left">
+				<tr>
+					<td><button class="gameSquare" id="00">00</button class="gameSquare"></td><td><button class="gameSquare" id="01">01</button class="gameSquare"></td><td><button class="gameSquare" id="02">02</button class="gameSquare"></td><td><button class="gameSquare" id="03">03</button class="gameSquare"></td><td><button class="gameSquare" id="04">04</button class="gameSquare"></td>
+				<tr>
+					<td><button class="gameSquare" id="10">10</button class="gameSquare"></td><td><button class="gameSquare" id="11">11</button class="gameSquare"></td><td><button class="gameSquare" id="12">12</button class="gameSquare"></td><td><button class="gameSquare" id="13">13</button class="gameSquare"></td><td><button class="gameSquare" id="14">14</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="20">20</button class="gameSquare"></td><td><button class="gameSquare" id="21">21</button class="gameSquare"></td><td><button class="gameSquare" id="22">22</button class="gameSquare"></td><td><button class="gameSquare" id="23">23</button class="gameSquare"></td><td><button class="gameSquare" id="24">24</button class="gameSquare"></td>
+				<tr>
+					<td><button class="gameSquare" id="30">30</button class="gameSquare"></td><td><button class="gameSquare" id="31">31</button class="gameSquare"></td><td><button class="gameSquare" id="32">32</button class="gameSquare"></td><td><button class="gameSquare" id="33">33</button class="gameSquare"></td><td><button class="gameSquare" id="34">34</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="40">40</button class="gameSquare"></td><td><button class="gameSquare" id="41">41</button class="gameSquare"></td><td><button class="gameSquare" id="42">42</button class="gameSquare"></td><td><button class="gameSquare" id="43">43</button class="gameSquare"></td><td><button class="gameSquare" id="44">44</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="50">50</button class="gameSquare"></td><td><button class="gameSquare" id="51">51</button class="gameSquare"></td><td><button class="gameSquare" id="52">52</button class="gameSquare"></td><td><button class="gameSquare" id="53">53</button class="gameSquare"></td><td><button class="gameSquare" id="54">54</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="60">60</button class="gameSquare"></td><td><button class="gameSquare" id="61">61</button class="gameSquare"></td><td><button class="gameSquare" id="62">62</button class="gameSquare"></td><td><button class="gameSquare" id="63">63</button class="gameSquare"></td><td><button class="gameSquare" id="64">64</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="70">70</button class="gameSquare"></td><td><button class="gameSquare" id="71">71</button class="gameSquare"></td><td><button class="gameSquare" id="72">72</button class="gameSquare"></td><td><button class="gameSquare" id="73">73</button class="gameSquare"></td><td><button class="gameSquare" id="74">74</button class="gameSquare"></td>
+				</tr>
+			</table>
+			<table id="right">
+				<tr>
+					<td><button class="gameSquare" id="05">05</button class="gameSquare"></td><td><button class="gameSquare" id="06">06</button class="gameSquare"></td><td><button class="gameSquare" id="07">07</button class="gameSquare"></td><td><button class="gameSquare" id="08">08</button class="gameSquare"></td><td><button class="gameSquare" id="09">09</button class="gameSquare"></td>
+				<tr>
+					<td><button class="gameSquare" id="15">15</button class="gameSquare"></td><td><button class="gameSquare" id="16">16</button class="gameSquare"></td><td><button class="gameSquare" id="17">17</button class="gameSquare"></td><td><button class="gameSquare" id="18">18</button class="gameSquare"></td><td><button class="gameSquare" id="19">19</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="25">25</button class="gameSquare"></td><td><button class="gameSquare" id="26">26</button class="gameSquare"></td><td><button class="gameSquare" id="27">27</button class="gameSquare"></td><td><button class="gameSquare" id="28">28</button class="gameSquare"></td><td><button class="gameSquare" id="29">29</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="35">35</button class="gameSquare"></td><td><button class="gameSquare" id="36">36</button class="gameSquare"></td><td><button class="gameSquare" id="37">37</button class="gameSquare"></td><td><button class="gameSquare" id="38">38</button class="gameSquare"></td><td><button class="gameSquare" id="39">39</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="45">45</button class="gameSquare"></td><td><button class="gameSquare" id="46">46</button class="gameSquare"></td><td><button class="gameSquare" id="47">47</button class="gameSquare"></td><td><button class="gameSquare" id="48">48</button class="gameSquare"></td><td><button class="gameSquare" id="49">49</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="55">55</button class="gameSquare"></td><td><button class="gameSquare" id="56">56</button class="gameSquare"></td><td><button class="gameSquare" id="57">57</button class="gameSquare"></td><td><button class="gameSquare" id="58">58</button class="gameSquare"></td><td><button class="gameSquare" id="59">59</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="65">65</button class="gameSquare"></td><td><button class="gameSquare" id="66">66</button class="gameSquare"></td><td><button class="gameSquare" id="67">67</button class="gameSquare"></td><td><button class="gameSquare" id="68">68</button class="gameSquare"></td><td><button class="gameSquare" id="69">69</button class="gameSquare"></td>
+				</tr>
+				<tr>
+					<td><button class="gameSquare" id="75">75</button class="gameSquare"></td><td><button class="gameSquare" id="76">76</button class="gameSquare"></td><td><button class="gameSquare" id="77">77</button class="gameSquare"></td><td><button class="gameSquare" id="78">78</button class="gameSquare"></td><td><button class="gameSquare" id="79">79</button class="gameSquare"></td>
+				</tr>
+			</table>	
+			<img id="imgPlayer1" src="images/vegetaBlue.png">
+			<img id="imgPlayer2" src="images/goldenFrieza.png">
+		</div>
+		<script src="js/new.js"></script>
+	</body>
+</html>
