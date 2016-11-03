@@ -167,54 +167,24 @@ var view = {
 			var image = document.getElementById("imgPlayer1");
 			image.src = "";
 
-			$("#goku").click(function() {
-				$('#messageAreaPlayer1').addClass('gokuMessageBoard');
-				$('#left').addClass('gokuGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/gokuBlue.png";
-				$("#heroSelect").css('display', 'none');
-			});
-
-			$("#vegeta").click(function() {
-				$('#messageAreaPlayer1').addClass('vegetaMessageBoard');
-				$('#left').addClass('vegetaGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/vegetaBlue2.png";
-				$("#heroSelect").css('display', 'none');
-			});
-
-			$("#trunks").click(function() {
-				$('#messageAreaPlayer1').addClass('trunksMessageBoard');
-				$('#left').addClass('trunksGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/trunks.png";
-				$("#heroSelect").css('display', 'none');
-			});
-
-			$("#gohan").click(function() {
-				$('#messageAreaPlayer1').addClass('gohanMessageBoard');
-				$('#left').addClass('gohanGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/gohan.png";
-				$("#heroSelect").css('display', 'none');
-			});
-
-			$("#piccolo").click(function() {
-				$('#messageAreaPlayer1').addClass('piccoloMessageBoard');
-				$('#left').addClass('piccoloGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/piccolo.png";
-				$("#heroSelect").css('display', 'none');
-			});
-
-			$("#tien").click(function() {
-				$('#messageAreaPlayer1').addClass('tienMessageBoard');
-				$('#left').addClass('tienGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/tien.png";
-				$("#heroSelect").css('display', 'none');
-			});
+			displayHero("#goku", 'gokuMessageBoard', 'gokuGameBoard', "images/gokuBlue.png");
+			displayHero("#vegeta", 'vegetaMessageBoard', 'vegetaGameBoard', "images/vegetaBlue2.png");
+			displayHero("#trunks", 'trunksMessageBoard', 'trunksGameBoard', "images/trunks.png");
+			displayHero("#gohan", 'gohanMessageBoard', 'gohanGameBoard', "images/gohan.png");			
+			displayHero("#piccolo", 'piccoloMessageBoard', 'piccoloGameBoard', "images/piccolo.png");
+			displayHero("#tien", 'tienMessageBoard', 'tienGameBoard', "images/tien.png");
 		});
+
+		function displayHero(character, characterMessageBoard, characterGameBoard, characterPic) {
+			$(character).click(function() {
+				$('#messageAreaPlayer1').addClass(characterMessageBoard);
+				$('#left').addClass(characterGameBoard);
+				var image = document.getElementById("imgPlayer1");
+				image.src = characterPic
+				$("#heroSelect").css('display', 'none');
+			});
+		};
+
 	},
 	player2CharacterSelectButton: function() {
 		$("#player2CS").click(function() {
@@ -224,54 +194,23 @@ var view = {
 			var image = document.getElementById("imgPlayer2");
 			image.src = "";
 
-			$("#black").click(function() {
-				$('#messageAreaPlayer2').addClass('blackMessageBoard');
-				$('#right').addClass('blackGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/blackAngry.png";
-				$("#villianSelect").css('display', 'none');
-			});
-
-			$("#frieza").click(function() {
-				$('#messageAreaPlayer2').addClass('freizaMessageBoard');
-				$('#right').addClass('freizaGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/goldenFrieza.png";
-				$("#villianSelect").css('display', 'none');
-			});
-
-			$("#buu").click(function() {
-				$('#messageAreaPlayer2').addClass('kidBuuMessageBoard');
-				$('#right').addClass('kidBuuGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/buu.png";
-				$("#villianSelect").css('display', 'none');
-			});
-
-			$("#cell").click(function() {
-				$('#messageAreaPlayer2').addClass('cellMessageBoard');
-				$('#right').addClass('cellGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/cell.png";
-				$("#villianSelect").css('display', 'none');
-			});
-
-			$("#frost").click(function() {
-				$('#messageAreaPlayer2').addClass('frostMessageBoard');
-				$('#right').addClass('frostGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/frostForm1.png";
-				$("#villianSelect").css('display', 'none');
-			});
-
-			$("#android20").click(function() {
-				$('#messageAreaPlayer2').addClass('android20MessageBoard');
-				$('#right').addClass('android20GameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/android20Stare.png";
-				$("#villianSelect").css('display', 'none');
-			});
+			displayVillian("#black", 'blackMessageBoard', 'blackGameBoard', "images/blackAngry.png");
+			displayVillian("#frieza", 'freizaMessageBoard', 'freizaGameBoard', "images/goldenFrieza.png");
+			displayVillian("#buu", 'kidBuuMessageBoard', 'kidBuuGameBoard', "images/buu.png");
+			displayVillian("#cell", 'cellMessageBoard', 'cellGameBoard', "images/cell.png");
+			displayVillian("#frost", 'frostMessageBoard', 'frostGameBoard', "images/frostForm1.png");
+			displayVillian("#android20",'android20MessageBoard', 'android20GameBoard', "images/android20Stare.png");
 		});
+
+		function displayVillian(character, characterMessageBoard, characterGameBoard, characterPic) {
+			$(character).click(function() {
+				$('#messageAreaPlayer2').addClass(characterMessageBoard);
+				$('#right').addClass(characterGameBoard);
+				var image = document.getElementById("imgPlayer2");
+				image.src = characterPic
+				$("#villianSelect").css('display', 'none');
+			});
+		};
 	}
 };
 
