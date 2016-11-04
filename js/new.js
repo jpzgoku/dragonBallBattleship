@@ -24,164 +24,28 @@ var view = {
 		cell.setAttribute("class", "miss")
 	},
 
-	/*player1CharacterSelect: function() {
-		$('#messageAreaPlayer1').removeClass();
-		$('#left').removeClass();
-		var player1Character = prompt("Player1 choose your character: 1 = Goku,  2 = Vegeta, 3 = Trunks, 4 = Gohan, 5 = Piccolo, 6 = Goten, 7 = Tien, 8 = Shenron");
-
-		switch(player1Character) {
-			case '1': 
-				$('#messageAreaPlayer1').addClass('gokuMessageBoard');
-				$('#left').addClass('gokuGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/gokuBlue.png";
-				break;
-			case '2':
-				$('#messageAreaPlayer1').addClass('vegetaMessageBoard');
-				$('#left').addClass('vegetaGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/vegetaBlue2.png";
-				break;
-			case '3':
-				$('#messageAreaPlayer1').addClass('trunksMessageBoard');
-				$('#left').addClass('trunksGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/trunks.png";
-				break;
-			case '4':
-				$('#messageAreaPlayer1').addClass('gohanMessageBoard');
-				$('#left').addClass('gohanGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/gohan.png";
-				break;
-			case '5':
-				$('#messageAreaPlayer1').addClass('piccoloMessageBoard');
-				$('#left').addClass('piccoloGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/piccolo.png";
-				break;
-			case '6':
-				$('#messageAreaPlayer1').addClass('gotenMessageBoard');
-				$('#left').addClass('gotenGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/goten.png";
-				break;
-			case '7':
-				$('#messageAreaPlayer1').addClass('tienMessageBoard');
-				$('#left').addClass('tienGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/tien.png";
-				break;
-			case '8':
-				$('#messageAreaPlayer1').addClass('shenronMessageBoard');
-				$('#left').addClass('shenronGameBoard');
-				var image = document.getElementById("imgPlayer1");
-				image.src = "images/shenron.png";
-				break;
-			default:
-				alert("Hit reload. Choose a number.");
-		};
-	},
-
-	player2CharacterSelect: function() {
-		$('#messageAreaPlayer2').removeClass();
-		$('#right').removeClass();
-		var player2Character = prompt("Player2 choose your character: 1 = Black,  2 = Frieza, 3 = Kid Buu, 4 = Super Buu, 5 = Cell, 6 = Cell Jr., 7 = Frost, 8 = Android 19, 9 = Android 20");
-
-		switch(player2Character) {
-			case '1': 
-				$('#messageAreaPlayer2').addClass('blackMessageBoard');
-				$('#right').addClass('blackGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/blackAngry.png";
-				break;
-			case '2':
-				$('#messageAreaPlayer2').addClass('freizaMessageBoard');
-				$('#right').addClass('freizaGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/goldenFrieza.png";
-				break;
-			case '3':
-				$('#messageAreaPlayer2').addClass('kidBuuMessageBoard');
-				$('#right').addClass('kidBuuGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/buu.png";
-				break;
-			case '4':
-				$('#messageAreaPlayer2').addClass('superBuuMessageBoard');
-				$('#right').addClass('superBuuGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/superBuu.png";
-				break;
-			case '5':
-				$('#messageAreaPlayer2').addClass('cellMessageBoard');
-				$('#right').addClass('cellGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/cell.png";
-				break;
-			case '6':
-				$('#messageAreaPlayer2').addClass('cellJrMessageBoard');
-				$('#right').addClass('cellJrGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/cellJr.png";
-				break;
-			case '7':
-				$('#messageAreaPlayer2').addClass('frostMessageBoard');
-				$('#right').addClass('frostGameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/frostForm1.png";
-				break;
-			case '8':
-				$('#messageAreaPlayer2').addClass('android19MessageBoard');
-				$('#right').addClass('android19GameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/android19.png";
-				break;
-			case '9':
-				$('#messageAreaPlayer2').addClass('android20MessageBoard');
-				$('#right').addClass('android20GameBoard');
-				var image = document.getElementById("imgPlayer2");
-				image.src = "images/android20Stare.png";
-				break;
-				alert("Hit reload. Choose a number.");
-		};
-	},
-
-	player1CharacterSelectButton: function() {
-		$("#player1CS").click(function() {
-			view.player1CharacterSelect();
-		});
-	},
-
-	player2CharacterSelectButton: function() {
-		$("#player2CS").click(function() {
-			view.player2CharacterSelect();
-		});
-	}*/
-
 	player1CharacterSelectButton: function() {
 		$("#player1CS").click(function() {
 			$("#heroSelect").css('display', 'block');
 			$('#messageAreaPlayer1').removeClass();
 			$('#left').removeClass();
-			var image = document.getElementById("imgPlayer1");
-			image.src = "";
+			$("#imgPlayer1").removeClass();
 
-			displayHero("#goku", 'gokuMessageBoard', 'gokuGameBoard', "images/gokuBlue.png");
-			displayHero("#vegeta", 'vegetaMessageBoard', 'vegetaGameBoard', "images/vegetaBlue2.png");
-			displayHero("#beerus", 'beerusMessageBoard', 'beerusGameBoard', "images/beerus.png");
-			displayHero("#trunks", 'trunksMessageBoard', 'trunksGameBoard', "images/trunks.png");
-			displayHero("#gohan", 'gohanMessageBoard', 'gohanGameBoard', "images/gohan.png");			
-			displayHero("#piccolo", 'piccoloMessageBoard', 'piccoloGameBoard', "images/piccolo.png");
-			displayHero("#tien", 'tienMessageBoard', 'tienGameBoard', "images/tien.png");
+			displayHero("#goku", 'gokuMessageBoard', 'gokuGameBoard', 'goku');
+			displayHero("#vegeta", 'vegetaMessageBoard', 'vegetaGameBoard', 'vegeta');
+			displayHero("#beerus", 'beerusMessageBoard', 'beerusGameBoard', 'beerus');
+			displayHero("#trunks", 'trunksMessageBoard', 'trunksGameBoard', 'trunks');
+			displayHero("#gohan", 'gohanMessageBoard', 'gohanGameBoard', 'gohan');			
+			displayHero("#piccolo", 'piccoloMessageBoard', 'piccoloGameBoard', 'piccolo');
+			displayHero("#tien", 'tienMessageBoard', 'tienGameBoard', 'tien');
+			displayHero("#gotenks", 'gotenksMessageBoard', 'gotenksGameBoard', 'gotenks');
 		});
 
 		function displayHero(character, characterMessageBoard, characterGameBoard, characterPic) {
 			$(character).click(function() {
 				$('#messageAreaPlayer1').addClass(characterMessageBoard);
 				$('#left').addClass(characterGameBoard);
-				var image = document.getElementById("imgPlayer1");
-				image.src = characterPic
+				$('#imgPlayer1').addClass(characterPic);
 				$("#heroSelect").css('display', 'none');
 			});
 		};
@@ -192,23 +56,27 @@ var view = {
 			$("#villianSelect").css('display', 'block');
 			$('#messageAreaPlayer2').removeClass();
 			$('#right').removeClass();
-			var image = document.getElementById("imgPlayer2");
-			image.src = "";
+			$("#imgPlayer2").removeClass();
 
-			displayVillian("#black", 'blackMessageBoard', 'blackGameBoard', "images/blackAngry.png");
-			displayVillian("#frieza", 'freizaMessageBoard', 'freizaGameBoard', "images/goldenFrieza.png");
-			displayVillian("#buu", 'kidBuuMessageBoard', 'kidBuuGameBoard', "images/buu.png");
-			displayVillian("#cell", 'cellMessageBoard', 'cellGameBoard', "images/cell.png");
-			displayVillian("#frost", 'frostMessageBoard', 'frostGameBoard', "images/frostForm1.png");
-			displayVillian("#android20",'android20MessageBoard', 'android20GameBoard', "images/android20Stare.png");
+			displayVillian("#black", 'blackMessageBoard', 'blackGameBoard', 'black');
+			displayVillian("#zamasu", 'zamasuMessageBoard', 'zamasuGameBoard', 'zamasu');
+			displayVillian("#frieza", 'freizaMessageBoard', 'freizaGameBoard', 'frieza');
+			displayVillian("#kidBuu", 'kidBuuMessageBoard', 'kidBuuGameBoard', 'kidBuu');
+			displayVillian("#superBuu", 'superBuuMessageBoard', 'superBuuGameBoard', 'superBuu');
+			displayVillian("#cell", 'cellMessageBoard', 'cellGameBoard', 'cell');
+			displayVillian("#imperfectCell", 'imperfectCellMessageBoard', 'imperfectCellGameBoard', 'imperfectCell');
+			displayVillian("#cellJr", 'cellJrMessageBoard', 'cellJrGameBoard', 'cellJr');
+			displayVillian("#frost", 'frostMessageBoard', 'frostGameBoard', 'frost');
+			displayVillian("#android17",'android17MessageBoard', 'android17GameBoard', 'android17');
+			displayVillian("#android19",'android19MessageBoard', 'android19GameBoard', 'android19');
+			displayVillian("#android20",'android20MessageBoard', 'android20GameBoard', 'android20');
 		});
 
 		function displayVillian(character, characterMessageBoard, characterGameBoard, characterPic) {
 			$(character).click(function() {
 				$('#messageAreaPlayer2').addClass(characterMessageBoard);
 				$('#right').addClass(characterGameBoard);
-				var image = document.getElementById("imgPlayer2");
-				image.src = characterPic
+				$('#imgPlayer2').addClass(characterPic);
 				$("#villianSelect").css('display', 'none');
 			});
 		};
@@ -479,6 +347,8 @@ function newGameButton() {
 	$("#clear").click(function() {
 		$('#left').find('td').removeClass('hit miss');
 		$('#right').find('td').removeClass('hit miss');
+		view.displayMessagePlayer1("");
+		view.displayMessagePlayer2("");
 		controllerPlayer1.guesses = 0;
 		controllerPlayer2.guesses = 0;
 		controllerPlayer2.previousGuesses.length = 0;

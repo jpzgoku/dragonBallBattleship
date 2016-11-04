@@ -92,6 +92,11 @@ li {
 	background-size: cover;
 	background-color: #ffff00;
 }
+#gotenks {
+	background: no-repeat url(../images/gotenksSS3.png);
+	background-size: cover;
+	background-color: #ffff00;
+}
 #masterRoshi {
 	background: no-repeat url(../images/masterRoshi.png);
 	background-size: cover;
@@ -115,10 +120,15 @@ li {
 #zamasu {
 	background: no-repeat url(../images/zamasu.png);
 	background-size: cover;
-	background-color: white;
+	background-color: #00ff80;
 }
 #kidBuu {
 	background: no-repeat url(../images/buu.png);
+	background-size: cover;
+	background-color: #ff94ce;
+}
+#superBuu {
+	background: no-repeat url(../images/superBuu.png);
 	background-size: cover;
 	background-color: #ff94ce;
 }
@@ -127,15 +137,30 @@ li {
 	background-size: cover;
 	background-color: #00ff00;
 }
-#android20 {
-	background: no-repeat url(../images/android20Stare.png);
+#cellJr {
+	background: no-repeat url(../images/cellJr.png);
 	background-size: cover;
-	background-color: #ffa500;
+	background-color: #48b3e7;
+}
+#imperfectCell {
+	background: no-repeat url(../images/imperfectCell.png);
+	background-size: cover;
+	background-color: #00e500;
+}
+#android17 {
+	background: no-repeat url(../images/android17.png);
+	background-size: cover;
+	background-color: #ff1919;
 }
 #android19 {
 	background: no-repeat url(../images/android19.png);
 	background-size: cover;
 	background-color: #ffe166;
+}
+#android20 {
+	background: no-repeat url(../images/android20Stare.png);
+	background-size: cover;
+	background-color: #ffa500;
 }
 #frost {
 	background: no-repeat url(../images/frostForm1.png);
@@ -186,10 +211,10 @@ div#messageAreaPlayer2 {
 .piccoloGameBoard {
 	background-color: #00ce00;
 }
-.gohanMessageBoard, .gotenMessageBoard {
+.gohanMessageBoard, .gotenMessageBoard, .gotenksMessageBoard {
 	color: #ffff00;
 }
-.gohanGameBoard, .gotenGameBoard {
+.gohanGameBoard, .gotenGameBoard, .gotenksGameBoard {
 	background-color: #ffff00;
 }
 .tienMessageBoard {
@@ -210,6 +235,12 @@ div#messageAreaPlayer2 {
 .blackGameBoard {
 	background-color: #ffc0cb;
 }
+.zamasuMessageBoard {
+	color: #00ff80;
+}
+.zamasuGameBoard {
+	background-color: #00ff80;
+}
 .freizaMessageBoard {
 	color: #ffe76a;
 }
@@ -228,6 +259,12 @@ div#messageAreaPlayer2 {
 .cellGameBoard {
 	background-color: #00ff00;
 }
+.imperfectCellMessageBoard {
+	color: #00e500;
+}
+.imperfectCellGameBoard {
+	background-color: #00e500;
+}
 .cellJrMessageBoard {
 	color: #48b3e7;
 }
@@ -239,6 +276,12 @@ div#messageAreaPlayer2 {
 }
 .frostGameBoard {
 	background-color: #e9e9e9;
+}
+.android17MessageBoard {
+	color: #ff1919;
+}
+.android17GameBoard {
+	background-color: #ff1919;
 }
 .android19MessageBoard {
 	color: #ffe166;
@@ -275,19 +318,110 @@ td {
 #right td:hover {
 	background-color: #590059;
 }
-#imgPlayer1 {
-	position: fixed;
-	bottom: 0;
-	left: -35px;
-}
+#imgPlayer1,
 #imgPlayer2 {
 	position: fixed;
 	bottom: 0;
+	height: 320px;
+	width: 320px;
+}
+#imgPlayer1 {
+	left: -35px;
+}
+#imgPlayer2 {
 	right: -35px;
+}
+.goku {
+	background: no-repeat url(../images/gokuBlue.png);
+	background-size: cover;
+}
+.vegeta {
+	background: no-repeat url(../images/vegetaBlue2.png);
+	background-size: cover;
+}
+.trunks {
+	background: no-repeat url(../images/trunks.png);
+	background-size: cover;
 }
 .beerus {
 	background: no-repeat url(../images/beerus.png);
 	background-size: 90%;
+}
+.piccolo {
+	background: no-repeat url(../images/piccolo.png);
+	background-size: cover;
+}
+.gohan {
+	background: no-repeat url(../images/gohan.png);
+	background-size: cover;
+}
+.tien {
+	background: no-repeat url(../images/tien.png);
+	background-size: cover;
+}
+.goten {
+	background: no-repeat url(../images/gotenksPose.png);
+	background-size: cover;
+}
+.gotenks {
+	background: no-repeat url(../images/gotenksSS3.png);
+	background-size: cover;
+}
+.masterRoshi {
+	background: no-repeat url(../images/masterRoshi.png);
+	background-size: cover;
+}
+.krillin {
+	background: no-repeat url(../images/krillinAngry.png);
+	background-size: 90%;
+}
+.frieza{
+	background: no-repeat url(../images/goldenFrieza.png);
+	background-size: cover;
+}
+.black {
+	background: no-repeat url(../images/blackAngry.png);
+	background-size: cover;
+}
+.zamasu {
+	background: no-repeat url(../images/zamasu.png) 50% 100%;
+	background-size: 90%;
+}
+.kidBuu {
+	background: no-repeat url(../images/buu.png);
+	background-size: cover;
+}
+.superBuu {
+	background: no-repeat url(../images/superBuu.png);
+	background-size: cover;
+}
+.cell {
+	background: no-repeat url(../images/cell.png);
+	background-size: cover;
+}
+.imperfectCell {
+	background: no-repeat url(../images/imperfectCell.png);
+	background-size: cover;
+}
+.android17 {
+	background: no-repeat url(../images/android17.png);
+	background-size: cover;
+}
+.android19 {
+	background: no-repeat url(../images/android19.png);
+	background-size: cover;
+}
+.android20 {
+	background: no-repeat url(../images/android20Stare.png);
+	background-size: cover;
+}
+.frost {
+	background: no-repeat url(../images/frostForm1.png);
+	background-size: cover;
+}
+.cellJr {
+	background: no-repeat url(../images/cellJr.png);
+	background-size: cover;
 }
 .hit {
 	background: url("../images/hit.png") no-repeat center center;
