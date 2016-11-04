@@ -1,7 +1,8 @@
 body {
 	background-color: black;
 }
-ul, li {
+ul,
+li {
 	padding: 0;
 	margin: 0;
 }
@@ -13,9 +14,13 @@ ul {
 li {
 	display: inline-block;
 	padding: 0 10px;
+	font-family: BlinkMacSystemFont;
 }
 #header {
 	margin: 50px 0 25px;
+}
+#header li {
+	cursor: default;
 }
 #newCharacterSelect {
 	display: none;
@@ -31,7 +36,8 @@ li {
 .menu:hover {
 	color: #ffff00;
 }
-#heroSelect, #villianSelect {
+#heroSelect,
+#villianSelect {
 	width: 960px;
 	position: relative;
 	text-align: center;
@@ -39,65 +45,140 @@ li {
 	margin: auto;
 	border-spacing: 0;
 }
-#heroSelect img, #villianSelect img {
-	position: relative;
-	bottom: -5px;
+#heroSelect td,
+#villianSelect td {
+	height: 240px;
+	width: 240px;
+	box-sizing: border-box;
+	border: none
 }
-#goku, #vegeta, #trunks {
+#goku {
+	background: no-repeat url(../images/gokuBlue.png);
+	background-size: cover;
 	background-color: #00ffff;
 }
+#vegeta {
+	background: no-repeat url(../images/vegetaBlue2.png);
+	background-size: cover;
+	background-color: #00ffff;
+}
+#trunks {
+	background: no-repeat url(../images/trunks.png);
+	background-size: cover;
+	background-color: #00ffff;
+}
+#beerus {
+	background: no-repeat url(../images/beerus.png);
+	background-size: 90%;
+	background-color: #885ead;
+}
 #piccolo {
-	background-color:#00ce00;
+	background: no-repeat url(../images/piccolo.png);
+	background-size: cover;
+	background-color:#00CE00;
 }
 #gohan {
+	background: no-repeat url(../images/gohan.png);
+	background-size: cover;
 	background-color: #ffff00;
 }
 #tien {
+	background: no-repeat url(../images/tien.png);
+	background-size: cover;
 	background-color: white;
 }
-#black {
-	background-color: #ffc0cb;
+#goten {
+	background: no-repeat url(../images/gotenksPose.png);
+	background-size: cover;
+	background-color: #ffff00;
 }
-#frieza {
+#masterRoshi {
+	background: no-repeat url(../images/masterRoshi.png);
+	background-size: cover;
+	background-color: orange;
+}
+#krillin {
+	background: no-repeat url(../images/krillinAngry.png);
+	background-size: 90%;
+	background-color: orange;
+}
+#frieza{
+	background: no-repeat url(../images/goldenFrieza.png);
+	background-size: cover;
 	background-color: #ffe76A;
 }
-#buu {
+#black {
+	background: no-repeat url(../images/blackAngry.png);
+	background-size: cover;
+	background-color: #ffc0cb;
+}
+#zamasu {
+	background: no-repeat url(../images/zamasu.png);
+	background-size: cover;
+	background-color: white;
+}
+#kidBuu {
+	background: no-repeat url(../images/buu.png);
+	background-size: cover;
 	background-color: #ff94ce;
 }
 #cell {
+	background: no-repeat url(../images/cell.png);
+	background-size: cover;
 	background-color: #00ff00;
 }
 #android20 {
+	background: no-repeat url(../images/android20Stare.png);
+	background-size: cover;
 	background-color: #ffa500;
 }
+#android19 {
+	background: no-repeat url(../images/android19.png);
+	background-size: cover;
+	background-color: #ffe166;
+}
 #frost {
+	background: no-repeat url(../images/frostForm1.png);
+	background-size: cover;
 	background-color: #e9e9e9;
+}
+#cellJr {
+	background: no-repeat url(../images/cellJr.png);
+	background-size: cover;
+	background-color: #48b3e7;
 }
 div#board {
 	position: relative;
-	width: 1024px;
+	width: 90%;
 	height: 863px;
 	margin: auto;
+	text-align: center;
+}
+div#messageAreaPlayer1,
+div#messageAreaPlayer2 {
+	margin: 40px 0 ;
+	display: inline-block;
+	width: 40%;
+	height: 48px;
+	font-size: 21px;
 }
 div#messageAreaPlayer1 {
-	padding-top: 40px;
-	position: absolute;
-	left: 0;
-	top: 0;
-	font-size: 21px;
+	float: left;
 }
 div#messageAreaPlayer2 {
-	padding-top: 40px;
-	position: absolute;
-	right: 0;
-	top: 0;
-	font-size: 21px;
+	float: right;
 }
 .gokuMessageBoard, .vegetaMessageBoard, .trunksMessageBoard {
 	color: #00ffff;
 }
 .gokuGameBoard, .vegetaGameBoard, .trunksGameBoard {
 	background-color: #00ffff;
+}
+.beerusMessageBoard {
+	color: #885ead;
+}
+.beerusGameBoard {
+	background-color: #885ead;
 }
 .piccoloMessageBoard {
 	color: #00ce00;
@@ -172,33 +253,26 @@ div#messageAreaPlayer2 {
 	background-color: #ffa500;
 }
 #left {
-	position: absolute;
-	left: 122px;
-	top: 98px;
+	margin: 0 auto;
+	display: inline-block;
 	border-spacing: 0;
 }
 #right {
-	position: absolute;
-	right: 122px;
-	top: 98px;
+	margin: 0 auto;
+	display: inline-block;
 	border-spacing: 0;
 }
 td {
-	width: 74px;
-	height: 74px;
+	width: 40px;
+	height: 40px;
 	border: 1px solid black;
-}
-#left button, #right button {
 	color: transparent;
-	background-color: transparent;
-	width: 73px;
-	height: 73px;
-	border: none;
+	box-sizing: border-box;
 }
-#left button:hover {
+#left td:hover {
 	background-color: #00e5e5;
 }
-#right button:hover {
+#right td:hover {
 	background-color: #590059;
 }
 #imgPlayer1 {
@@ -211,12 +285,37 @@ td {
 	bottom: 0;
 	right: -35px;
 }
+.beerus {
+	background: no-repeat url(../images/beerus.png);
+	background-size: 90%;
+}
 .hit {
 	background: url("../images/hit.png") no-repeat center center;
+	background-size: contain;
 }
 .miss {
 	background: url("../images/miss.png") no-repeat center center;
+	background-size: contain;
 }
 .shade {
 	background-color: black;
 }
+@media only screen and (min-width: 1024px) {
+	td {
+		height: 52px;
+		width: 52px;
+	}
+}
+@media only screen and (min-width: 1100px) {
+	td {
+		height: 62px;
+		width: 62px;
+	}
+}
+@media only screen and (min-width: 1200px) {
+	td {
+		height: 75px;
+		width: 75px;
+	}
+}
+

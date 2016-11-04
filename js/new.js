@@ -169,6 +169,7 @@ var view = {
 
 			displayHero("#goku", 'gokuMessageBoard', 'gokuGameBoard', "images/gokuBlue.png");
 			displayHero("#vegeta", 'vegetaMessageBoard', 'vegetaGameBoard', "images/vegetaBlue2.png");
+			displayHero("#beerus", 'beerusMessageBoard', 'beerusGameBoard', "images/beerus.png");
 			displayHero("#trunks", 'trunksMessageBoard', 'trunksGameBoard', "images/trunks.png");
 			displayHero("#gohan", 'gohanMessageBoard', 'gohanGameBoard', "images/gohan.png");			
 			displayHero("#piccolo", 'piccoloMessageBoard', 'piccoloGameBoard', "images/piccolo.png");
@@ -376,7 +377,7 @@ var model = {
 			}
 		}
 		return false;
-	}
+	}, 
 };
 
 function parseGuessPlayer1(guess) {
@@ -388,7 +389,7 @@ function parseGuessPlayer1(guess) {
 		alert("Don't attack yourself!")
 	}
 	return null;
-}
+};
 
 function parseGuessPlayer2(guess) {
 	var row = guess.charAt(0);
@@ -399,7 +400,7 @@ function parseGuessPlayer2(guess) {
 		alert("Don't attack yourself!")
 	}
 	return null;
-}
+};
 
 var controllerPlayer1 = {
 	guesses: 0,
@@ -476,8 +477,8 @@ function twoPlayerGameButton() {
 
 function newGameButton() {
 	$("#clear").click(function() {
-		$('#left').find('button').removeClass('hit miss');
-		$('#right').find('button').removeClass('hit miss');
+		$('#left').find('td').removeClass('hit miss');
+		$('#right').find('td').removeClass('hit miss');
 		controllerPlayer1.guesses = 0;
 		controllerPlayer2.guesses = 0;
 		controllerPlayer2.previousGuesses.length = 0;
@@ -495,7 +496,7 @@ function newGameButton() {
 };
 
 function play1PlayerGame() {
-	$('.gameSquare').on('click', function() {
+	$('#right').find('td').on('click', function() {
 		var guess = $(this).text();
 		controllerPlayer1.processGuessPlayer1(guess);
 		controllerPlayer2.computerMakeGuess();		
@@ -503,7 +504,7 @@ function play1PlayerGame() {
 };
 
 function play2PlayerGame() {
-	$('.gameSquare').on('click', function() {
+	$('#board').find('td').on('click', function() {
 		var guess = $(this).text();
 		if (controllerPlayer1.guesses <= controllerPlayer2.guesses) {
 			controllerPlayer1.processGuessPlayer1(guess);
