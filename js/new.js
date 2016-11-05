@@ -30,6 +30,7 @@ var view = {
 			$('#messageAreaPlayer1').removeClass();
 			$('#left').removeClass();
 			$("#imgPlayer1").removeClass();
+			$("#board").css('display', 'none');
 
 			displayHero("#goku", 'gokuMessageBoard', 'gokuGameBoard', 'goku');
 			displayHero("#vegeta", 'vegetaMessageBoard', 'vegetaGameBoard', 'vegeta');
@@ -47,6 +48,7 @@ var view = {
 				$('#left').addClass(characterGameBoard);
 				$('#imgPlayer1').addClass(characterPic);
 				$("#heroSelect").css('display', 'none');
+				$("#board").css('display', 'block');
 			});
 		};
 
@@ -57,6 +59,7 @@ var view = {
 			$('#messageAreaPlayer2').removeClass();
 			$('#right').removeClass();
 			$("#imgPlayer2").removeClass();
+			$("#board").css('display', 'none');
 
 			displayVillian("#black", 'blackMessageBoard', 'blackGameBoard', 'black');
 			displayVillian("#zamasu", 'zamasuMessageBoard', 'zamasuGameBoard', 'zamasu');
@@ -78,6 +81,7 @@ var view = {
 				$('#right').addClass(characterGameBoard);
 				$('#imgPlayer2').addClass(characterPic);
 				$("#villianSelect").css('display', 'none');
+				$("#board").css('display', 'block');
 			});
 		};
 	}
