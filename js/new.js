@@ -1,27 +1,25 @@
 var view = {
 	displayMessagePlayer1: function(msg) {
-		var messageAreaPlayer1 = document.getElementById("messageAreaPlayer1");
-		messageAreaPlayer1.innerHTML = msg;
+		$("#messageAreaPlayer1").html(msg);
 	},
 	displayHitPlayer1: function(location) {
 		var cell = document.getElementById(location);
-		cell.setAttribute("class", "hit");
+		$(cell).addClass('hit');
 	},
 	displayMissPlayer1: function(location) {
 		var cell = document.getElementById(location);
-		cell.setAttribute("class", "miss")
+		$(cell).addClass('miss');
 	},
 	displayMessagePlayer2: function(msg) {
-		var messageAreaPlayer2 = document.getElementById("messageAreaPlayer2");
-		messageAreaPlayer2.innerHTML = msg;
+		$("#messageAreaPlayer2").html(msg);
 	},
 	displayHitPlayer2: function(location) {
 		var cell = document.getElementById(location);
-		cell.setAttribute("class", "hit");
+		$(cell).addClass('hit');
 	},
 	displayMissPlayer2: function(location) {
 		var cell = document.getElementById(location);
-		cell.setAttribute("class", "miss")
+		$(cell).addClass('miss');
 	},
 
 	player1CharacterSelectButton: function() {
@@ -87,22 +85,20 @@ var view = {
 	}
 };
 
+
 var model = {
 	boardSizeRow: 8,
 	boardSizeCol: 5,
 	numShipsPlayer1: 3,
 	numShipsPlayer2: 3,
 	shipLength: 3,
-	shipsSunkPlayer1: 0,
-	shipsSunkPlayer2: 0,
+	shipsPlayer1:  [{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+					{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+					{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }],
 
-	shipsPlayer1:  [{ locations: [0, 0, 0], hits: ["", "", ""] },
-					{ locations: [0, 0, 0], hits: ["", "", ""] },
-					{ locations: [0, 0, 0], hits: ["", "", ""] }],
-
-	shipsPlayer2:  [{ locations: [0, 0, 0], hits: ["", "", ""] },
-					{ locations: [0, 0, 0], hits: ["", "", ""] },
-					{ locations: [0, 0, 0], hits: ["", "", ""] }],
+	shipsPlayer2:  [{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+					{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+					{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }],
 
 	firePlayer1: function(guess) {
 		for (var i = 0; i < this.numShipsPlayer1; i++) {
@@ -114,7 +110,7 @@ var model = {
 				view.displayMessagePlayer1("HIT!");
 				if (this.isSunkPlayer1(ship)) {
 					view.displayMessagePlayer1("You completed the combo!");
-					this.shipsSunkPlayer1++;
+					this.shipsPlayer1[i].sunk = true;
 				}
 				return true;
 			}
@@ -133,7 +129,7 @@ var model = {
 				view.displayMessagePlayer2("HIT!");
 				if (this.isSunkPlayer2(ship)) {
 					view.displayMessagePlayer2("You completed the combo!");
-					this.shipsSunkPlayer2++;
+					this.shipsPlayer2[i].sunk = true;
 				}
 				return true;
 			}
@@ -161,13 +157,31 @@ var model = {
 		return true;
 	},
 
+	allShipsSunkPlayer1: function() {
+		for (var i = 0; i < this.shipsPlayer1.length; i++) {
+			if (this.shipsPlayer1[i].sunk === false) {
+				return false
+			}
+		}
+		return true;
+	},
+
+	allShipsSunkPlayer2: function() {
+		for (var i = 0; i < this.shipsPlayer2.length; i++) {
+			if (this.shipsPlayer2[i].sunk === false) {
+				return false
+			}
+		}
+		return true;
+	},
+
 	generateShipLocationsPlayer1: function() {
 		var locations;
 		for (var i = 0; i < this.numShipsPlayer1; i++) {
 			do {
 				locations = this.generateShipPlayer1();
 			} while (this.collisionPlayer1(locations));
-			this.shipsPlayer1[i].locations = locations;
+			this.shipsPlayer1[i].locations = locations; 
 		}
 	},
 
@@ -177,7 +191,7 @@ var model = {
 			do {
 				locations = this.generateShipPlayer2();
 			} while (this.collisionPlayer2(locations));
-			this.shipsPlayer2[i].locations = locations;
+			this.shipsPlayer2[i].locations = locations; 
 		}
 	},
 
@@ -258,7 +272,7 @@ function parseGuessPlayer1(guess) {
 	if (column > 4) {
 		return row + column;
 	} else {
-		alert("Don't attack yourself!")
+		view.displayMessagePlayer1("Don't attack yourself!");
 	}
 	return null;
 };
@@ -269,7 +283,7 @@ function parseGuessPlayer2(guess) {
 	if (column < 5) {
 		return row + column;
 	} else {
-		alert("Don't attack yourself!")
+		view.displayMessagePlayer2("Don't attack yourself!");
 	}
 	return null;
 };
@@ -282,7 +296,7 @@ var controllerPlayer1 = {
 		if (location) {
 			this.guesses++;
 			var hit = model.firePlayer1(location);
-			if (hit && model.shipsSunkPlayer1 === model.numShipsPlayer1) {
+			if (hit && model.allShipsSunkPlayer1()) {
 				view.displayMessagePlayer1("You win! You landed all 3 combos in " + this.guesses + " attemps!");
 			}
 		}
@@ -297,26 +311,84 @@ var controllerPlayer2 = {
 		if (location) {
 			this.guesses++;
 			var hit = model.firePlayer2(location);
-			if (hit && model.shipsSunkPlayer2 === model.numShipsPlayer2) {
+			if (hit && model.allShipsSunkPlayer2()) {
 				view.displayMessagePlayer2("You win! You landed all 3 combos in " + this.guesses + " attemps!");
 			}
 		}
 	},
 	previousGuesses: [],
 
-	computerMakeGuess: function() {
+	computerMakeGuess: function(runThroughs) {
 		var sum;
+
 		function randomNumber() {
 			var num1 = Math.floor(Math.random() * model.boardSizeRow).toString();
 			var num2 = Math.floor(Math.random() * model.boardSizeCol).toString();
 			sum = num1 + num2;
+			return sum;
 		};
-		randomNumber();	
 
+		function educatedGuess() {
+			for (var i = 0; i < model.shipsPlayer2.length; i++) {
+				for( var j = 0; j < model.shipsPlayer2.length; j++) {
+					if (model.shipsPlayer2[i].hits[j] === 'hit' && model.shipsPlayer2[i].sunk !== true) {
+						var num1 = model.shipsPlayer2[i].locations[j].charAt(0);
+						var num2 = model.shipsPlayer2[i].locations[j].charAt(1);
+						if (runThroughs === 0) {
+							runThroughs++;
+							sum = (Number(num1) + 1) + num2;
+							return Number(sum);
+						} else if (runThroughs === 1) {
+							runThroughs++;
+							sum = (Number(num1) - 1) + num2;
+							return sum;
+						} else if (runThroughs === 2) {
+							runThroughs++;
+							sum = num1 + (Number(num2) - 1);
+							return sum;
+						} else if (runThroughs === 3) {
+							runThroughs++;
+							sum = num1 + (Number(num2) + 1);
+							return sum;
+						} else if (runThroughs > 3) {
+							var k = j - 1;
+							if (model.shipsPlayer2[i].hits[k] === 'hit') {
+								if (runThroughs === 4) {
+									runThroughs++;
+									sum = (Number(num1) + 1) + num2;
+									return Number(sum);
+								} else if (runThroughs === 5) {
+									runThroughs++;
+									sum = (Number(num1) - 1) + num2;
+									return sum;
+								} else if (runThroughs === 6) {
+									runThroughs++;
+									sum = num1 + (Number(num2) - 1);
+									return sum;
+								} else if (runThroughs === 7) {
+									runThroughs++;
+									sum = num1 + (Number(num2) + 1);
+									return sum;
+								}
+							}
+						}
+					} 
+				}
+			}
+			randomNumber();
+		};
+
+		console.log(runThroughs);
+		if (this.guesses === 0) {
+			randomNumber();
+		} else {
+			educatedGuess();
+		};
+		
 		for (var i = 0; i < this.previousGuesses.length; i++) {
 			if (sum === this.previousGuesses[i]) {
 				console.log("Alert! Dumplicate Number!");
-				this.computerMakeGuess();
+				this.computerMakeGuess(runThroughs);
 				return false;
 			} // if there is a duplicate number then the computer will make a new guess
 		};
@@ -324,9 +396,6 @@ var controllerPlayer2 = {
 		this.previousGuesses.push(sum);
 		var guess = sum;
 		console.log(this.previousGuesses);
-		/*console.log(model.shipsPlayer2[0]);
-		console.log(model.shipsPlayer2[1]);
-		console.log(model.shipsPlayer2[2]);*/
 		this.processGuessPlayer2(guess);
 	}
 };
@@ -356,14 +425,12 @@ function newGameButton() {
 		controllerPlayer1.guesses = 0;
 		controllerPlayer2.guesses = 0;
 		controllerPlayer2.previousGuesses.length = 0;
-		model.shipsSunkPlayer1 = 0;
-		model.shipsSunkPlayer2 = 0;
-		model.shipsPlayer1 =   [{ locations: [0, 0, 0], hits: ["", "", ""] },
-								{ locations: [0, 0, 0], hits: ["", "", ""] },
-								{ locations: [0, 0, 0], hits: ["", "", ""] }];
-		model.shipsPlayer2 =   [{ locations: [0, 0, 0], hits: ["", "", ""] },
-								{ locations: [0, 0, 0], hits: ["", "", ""] },
-								{ locations: [0, 0, 0], hits: ["", "", ""] }];
+		model.shipsPlayer1 =   [{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
+		model.shipsPlayer2 =   [{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
 		model.generateShipLocationsPlayer1();
 		model.generateShipLocationsPlayer2();
 	});
@@ -371,9 +438,10 @@ function newGameButton() {
 
 function play1PlayerGame() {
 	$('#right').find('td').on('click', function() {
+		var runThroughs = 0;
 		var guess = $(this).text();
 		controllerPlayer1.processGuessPlayer1(guess);
-		controllerPlayer2.computerMakeGuess();		
+		controllerPlayer2.computerMakeGuess(runThroughs);		
 	});
 };
 
