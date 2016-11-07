@@ -49,8 +49,8 @@ var view = {
 				$("#board").css('display', 'block');
 			});
 		};
-
 	},
+
 	player2CharacterSelectButton: function() {
 		$("#player2CS").click(function() {
 			$("#villianSelect").css('display', 'block');
@@ -319,16 +319,14 @@ var controllerPlayer2 = {
 	previousGuesses: [],
 
 	computerMakeGuess: function(runThroughs) {
-		var sum;
 
-		function randomNumber() {
+		var randomNumber = function() {
 			var num1 = Math.floor(Math.random() * model.boardSizeRow).toString();
 			var num2 = Math.floor(Math.random() * model.boardSizeCol).toString();
-			sum = num1 + num2;
-			return sum;
+			return num1 + num2;
 		};
 
-		function educatedGuess() {
+		var educatedGuess = function() {
 			for (var i = 0; i < model.shipsPlayer2.length; i++) {
 				for( var j = 0; j < model.shipsPlayer2.length; j++) {
 					if (model.shipsPlayer2[i].hits[j] === 'hit' && model.shipsPlayer2[i].sunk !== true) {
@@ -336,53 +334,45 @@ var controllerPlayer2 = {
 						var num2 = model.shipsPlayer2[i].locations[j].charAt(1);
 						if (runThroughs === 0) {
 							runThroughs++;
-							sum = (Number(num1) + 1) + num2;
-							return Number(sum);
+							return (Number(num1) + 1) + num2;
 						} else if (runThroughs === 1) {
 							runThroughs++;
-							sum = (Number(num1) - 1) + num2;
-							return sum;
+							return (Number(num1) - 1) + num2;
 						} else if (runThroughs === 2) {
 							runThroughs++;
-							sum = num1 + (Number(num2) - 1);
-							return sum;
+							return num1 + (Number(num2) - 1);
 						} else if (runThroughs === 3) {
 							runThroughs++;
-							sum = num1 + (Number(num2) + 1);
-							return sum;
+							return num1 + (Number(num2) + 1);
 						} else if (runThroughs > 3) {
 							var k = j - 1;
 							if (model.shipsPlayer2[i].hits[k] === 'hit') {
 								if (runThroughs === 4) {
 									runThroughs++;
-									sum = (Number(num1) + 1) + num2;
-									return Number(sum);
+									return (Number(num1) + 1) + num2;
 								} else if (runThroughs === 5) {
 									runThroughs++;
-									sum = (Number(num1) - 1) + num2;
-									return sum;
+									return (Number(num1) - 1) + num2;
 								} else if (runThroughs === 6) {
 									runThroughs++;
-									sum = num1 + (Number(num2) - 1);
-									return sum;
+									return num1 + (Number(num2) - 1);
 								} else if (runThroughs === 7) {
 									runThroughs++;
-									sum = num1 + (Number(num2) + 1);
-									return sum;
+									return num1 + (Number(num2) + 1);
 								}
 							}
 						}
 					} 
 				}
 			}
-			randomNumber();
+			return randomNumber();
 		};
 
 		console.log(runThroughs);
 		if (this.guesses === 0) {
-			randomNumber();
+			var sum = randomNumber();
 		} else {
-			educatedGuess();
+			var sum = educatedGuess();
 		};
 		
 		for (var i = 0; i < this.previousGuesses.length; i++) {
