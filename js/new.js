@@ -333,32 +333,32 @@ var controllerPlayer2 = {
 						var num1 = model.shipsPlayer2[i].locations[j].charAt(0);
 						var num2 = model.shipsPlayer2[i].locations[j].charAt(1);
 						if (runThroughs === 0) {
-							runThroughs++;
-							return (Number(num1) + 1) + num2;
+							guess = (Number(num1) + 1) + num2;
+							return checkIfOnBoard(guess);
 						} else if (runThroughs === 1) {
-							runThroughs++;
-							return (Number(num1) - 1) + num2;
+							guess = (Number(num1) - 1) + num2;
+							return checkIfOnBoard(guess);
 						} else if (runThroughs === 2) {
-							runThroughs++;
-							return num1 + (Number(num2) - 1);
+							guess = num1 + (Number(num2) - 1);
+							return checkIfOnBoard(guess);
 						} else if (runThroughs === 3) {
-							runThroughs++;
-							return num1 + (Number(num2) + 1);
+							guess = num1 + (Number(num2) + 1);
+							return checkIfOnBoard(guess);
 						} else if (runThroughs > 3) {
 							var k = j - 1;
 							if (model.shipsPlayer2[i].hits[k] === 'hit') {
 								if (runThroughs === 4) {
-									runThroughs++;
-									return (Number(num1) + 1) + num2;
+									guess = (Number(num1) + 1) + num2;
+									return checkIfOnBoard(guess);
 								} else if (runThroughs === 5) {
-									runThroughs++;
-									return (Number(num1) - 1) + num2;
+									guess = (Number(num1) - 1) + num2;
+									return checkIfOnBoard(guess);
 								} else if (runThroughs === 6) {
-									runThroughs++;
-									return num1 + (Number(num2) - 1);
+									guess = num1 + (Number(num2) - 1);
+									return checkIfOnBoard(guess);
 								} else if (runThroughs === 7) {
-									runThroughs++;
-									return num1 + (Number(num2) + 1);
+									guess = num1 + (Number(num2) + 1);
+									return checkIfOnBoard(guess);
 								}
 							}
 						}
@@ -368,23 +368,27 @@ var controllerPlayer2 = {
 			return randomNumber();
 		};
 
-		console.log(runThroughs);
-		if (this.guesses === 0) {
-			var sum = randomNumber();
-		} else {
-			var sum = educatedGuess();
+		function checkIfOnBoard(guess) {
+			runThroughs++;
+			var secondDigit = String(guess).charAt(1);
+			if (guess > (String(model.boardSizeRow - 1) + String(model.boardSizeCol - 1)) || guess.length !== 2 || Number(secondDigit) === model.boardSizeCol) {
+				return educatedGuess();
+			}
+			return guess;
 		};
+
+		console.log(runThroughs);
+
+		var guess = (this.guesses === 0) ? randomNumber() : educatedGuess();
 		
 		for (var i = 0; i < this.previousGuesses.length; i++) {
-			if (sum === this.previousGuesses[i]) {
+			if (guess === this.previousGuesses[i]) {
 				console.log("Alert! Dumplicate Number!");
-				this.computerMakeGuess(runThroughs);
-				return false;
+				return this.computerMakeGuess(runThroughs);
 			} // if there is a duplicate number then the computer will make a new guess
 		};
 		
-		this.previousGuesses.push(sum);
-		var guess = sum;
+		this.previousGuesses.push(guess);
 		console.log(this.previousGuesses);
 		this.processGuessPlayer2(guess);
 	}
