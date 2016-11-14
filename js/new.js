@@ -30,25 +30,38 @@ var view = {
 			$("#imgPlayer1").removeClass();
 			$("#board").css('display', 'none');
 
-			displayHero("#goku", 'gokuMessageBoard', 'gokuGameBoard', 'goku');
-			displayHero("#vegeta", 'vegetaMessageBoard', 'vegetaGameBoard', 'vegeta');
-			displayHero("#beerus", 'beerusMessageBoard', 'beerusGameBoard', 'beerus');
-			displayHero("#trunks", 'trunksMessageBoard', 'trunksGameBoard', 'trunks');
-			displayHero("#gohan", 'gohanMessageBoard', 'gohanGameBoard', 'gohan');			
-			displayHero("#piccolo", 'piccoloMessageBoard', 'piccoloGameBoard', 'piccolo');
-			displayHero("#tien", 'tienMessageBoard', 'tienGameBoard', 'tien');
-			displayHero("#gotenks", 'gotenksMessageBoard', 'gotenksGameBoard', 'gotenks');
+			displayHero(".goku", 'gokuMessageBoard', 'gokuBackground', 'goku');
+			displayHero(".vegeta", 'vegetaMessageBoard', 'vegetaBackground', 'vegeta');
+			displayHero(".superVegeta", 'superVegetaMessageBoard', 'superVegetaBackground', 'superVegeta');
+			displayHero(".beerus", 'beerusMessageBoard', 'beerusBackground', 'beerus');
+			displayHero(".trunks", 'trunksMessageBoard', 'trunksBackground', 'trunks');
+			displayHero(".gohan", 'gohanMessageBoard', 'gohanBackground', 'gohan');			
+			displayHero(".piccolo", 'piccoloMessageBoard', 'piccoloBackground', 'piccolo');
+			displayHero(".tien", 'tienMessageBoard', 'tienBackground', 'tien');
+			displayHero(".gotenks", 'gotenksMessageBoard', 'gotenksBackground', 'gotenks');
 		});
 
-		function displayHero(character, characterMessageBoard, characterGameBoard, characterPic) {
+		function displayHero(character, characterMessageBoard, characterBackground, characterPic) {
 			$(character).click(function() {
+				$('#messageAreaPlayer1').removeClass();
 				$('#messageAreaPlayer1').addClass(characterMessageBoard);
-				$('#left').addClass(characterGameBoard);
+				$('#left').removeClass();
+				$('#left').addClass(characterBackground);
+				$('#imgPlayer1').removeClass();
 				$('#imgPlayer1').addClass(characterPic);
 				$("#heroSelect").css('display', 'none');
 				$("#board").css('display', 'block');
 			});
 		};
+	},
+
+	toggleCharacters: function(divNumber, array) {
+		$(divNumber).contextmenu(function() {
+			var classes = array;
+			$(divNumber).each(function() {
+				this.className = classes[($.inArray(this.className, classes)+1)%classes.length];
+			})
+		});
 	},
 
 	player2CharacterSelectButton: function() {
@@ -59,24 +72,24 @@ var view = {
 			$("#imgPlayer2").removeClass();
 			$("#board").css('display', 'none');
 
-			displayVillian("#black", 'blackMessageBoard', 'blackGameBoard', 'black');
-			displayVillian("#zamasu", 'zamasuMessageBoard', 'zamasuGameBoard', 'zamasu');
-			displayVillian("#frieza", 'freizaMessageBoard', 'freizaGameBoard', 'frieza');
-			displayVillian("#kidBuu", 'kidBuuMessageBoard', 'kidBuuGameBoard', 'kidBuu');
-			displayVillian("#superBuu", 'superBuuMessageBoard', 'superBuuGameBoard', 'superBuu');
-			displayVillian("#cell", 'cellMessageBoard', 'cellGameBoard', 'cell');
-			displayVillian("#imperfectCell", 'imperfectCellMessageBoard', 'imperfectCellGameBoard', 'imperfectCell');
-			displayVillian("#cellJr", 'cellJrMessageBoard', 'cellJrGameBoard', 'cellJr');
-			displayVillian("#frost", 'frostMessageBoard', 'frostGameBoard', 'frost');
-			displayVillian("#android17",'android17MessageBoard', 'android17GameBoard', 'android17');
-			displayVillian("#android19",'android19MessageBoard', 'android19GameBoard', 'android19');
-			displayVillian("#android20",'android20MessageBoard', 'android20GameBoard', 'android20');
+			displayVillian(".black", 'blackMessageBoard', 'blackBackground', 'black');
+			displayVillian(".zamasu", 'zamasuMessageBoard', 'zamasuBackground', 'zamasu');
+			displayVillian(".frieza", 'freizaMessageBoard', 'freizaBackground', 'frieza');
+			displayVillian(".kidBuu", 'kidBuuMessageBoard', 'kidBuuBackground', 'kidBuu');
+			displayVillian(".superBuu", 'superBuuMessageBoard', 'superBuuBackground', 'superBuu');
+			displayVillian(".cell", 'cellMessageBoard', 'cellBackground', 'cell');
+			displayVillian(".imperfectCell", 'imperfectCellMessageBoard', 'imperfectCellBackground', 'imperfectCell');
+			displayVillian(".cellJr", 'cellJrMessageBoard', 'cellJrBackground', 'cellJr');
+			displayVillian(".frost", 'frostMessageBoard', 'frostBackground', 'frost');
+			displayVillian(".android17",'android17MessageBoard', 'android17Background', 'android17');
+			displayVillian(".android19",'android19MessageBoard', 'android19Background', 'android19');
+			displayVillian(".android20",'android20MessageBoard', 'android20Background', 'android20');
 		});
 
-		function displayVillian(character, characterMessageBoard, characterGameBoard, characterPic) {
+		function displayVillian(character, characterMessageBoard, characterBackground, characterPic) {
 			$(character).click(function() {
 				$('#messageAreaPlayer2').addClass(characterMessageBoard);
-				$('#right').addClass(characterGameBoard);
+				$('#right').addClass(characterBackground);
 				$('#imgPlayer2').addClass(characterPic);
 				$("#villianSelect").css('display', 'none');
 				$("#board").css('display', 'block');
@@ -84,7 +97,6 @@ var view = {
 		};
 	}
 };
-
 
 var model = {
 	boardSizeRow: 8,
@@ -116,9 +128,11 @@ var model = {
 			}
 		}
 		view.displayMissPlayer1(guess);
-		view.displayMessagePlayer1("You missed.");
+		(this.allShipsSunkPlayer1()) ? view.displayMessagePlayer1("You win! You landed all 3 combos in " + controllerPlayer1.guesses + " attemps!") :
+									   view.displayMessagePlayer1("You missed.");
 		return false;
 	},
+
 	firePlayer2: function(guess) {
 		for (var i = 0; i < this.numShipsPlayer2; i++) {
 			var ship = this.shipsPlayer2[i];
@@ -135,7 +149,8 @@ var model = {
 			}
 		}
 		view.displayMissPlayer2(guess);
-		view.displayMessagePlayer2("You missed.");
+		(this.allShipsSunkPlayer2()) ? view.displayMessagePlayer2("You win! You landed all 3 combos in " + controllerPlayer2.guesses + " attemps!") :
+									   view.displayMessagePlayer2("You missed.");
 		return false;
 	},
 
@@ -294,9 +309,11 @@ var controllerPlayer1 = {
 	processGuessPlayer1: function(guess) {
 		var location = parseGuessPlayer1(guess);
 		if (location) {
-			this.guesses++;
-			var hit = model.firePlayer1(location);
-			if (hit && model.allShipsSunkPlayer1()) {
+			if (!model.allShipsSunkPlayer1()) {
+				this.guesses++;
+			}
+			model.firePlayer1(location);
+			if (model.allShipsSunkPlayer1()) {
 				view.displayMessagePlayer1("You win! You landed all 3 combos in " + this.guesses + " attemps!");
 			}
 		}
@@ -309,9 +326,11 @@ var controllerPlayer2 = {
 	processGuessPlayer2: function(guess) {
 		var location = parseGuessPlayer2(guess);
 		if (location) {
-			this.guesses++;
-			var hit = model.firePlayer2(location);
-			if (hit && model.allShipsSunkPlayer2()) {
+			if (!model.allShipsSunkPlayer2()) {
+				this.guesses++;
+			}
+			model.firePlayer2(location);
+			if (model.allShipsSunkPlayer2()) {
 				view.displayMessagePlayer2("You win! You landed all 3 combos in " + this.guesses + " attemps!");
 			}
 		}
@@ -432,16 +451,18 @@ function newGameButton() {
 
 function play1PlayerGame() {
 	$('#right').find('td').on('click', function() {
-		var runThroughs = 0;
-		var guess = $(this).text();
-		controllerPlayer1.processGuessPlayer1(guess);
-		controllerPlayer2.computerMakeGuess(runThroughs);		
+		if (!model.allShipsSunkPlayer1()) {
+			var runThroughs = 0;
+			var guess = $(this).attr('id');
+			controllerPlayer1.processGuessPlayer1(guess);
+			controllerPlayer2.computerMakeGuess(runThroughs);	
+		}
 	});
 };
 
 function play2PlayerGame() {
 	$('#board').find('td').on('click', function() {
-		var guess = $(this).text();
+		var guess = $(this).attr('id');
 		if (controllerPlayer1.guesses <= controllerPlayer2.guesses) {
 			controllerPlayer1.processGuessPlayer1(guess);
 		} else {
@@ -450,7 +471,7 @@ function play2PlayerGame() {
 	});
 };
 
-function init() {
+window.onload = function() {
 	view.player1CharacterSelectButton();
 	view.player2CharacterSelectButton();
 	singlePlayerGameButton();
@@ -458,8 +479,8 @@ function init() {
 	newGameButton();
 	model.generateShipLocationsPlayer1();
 	model.generateShipLocationsPlayer2();
+	view.toggleCharacters("#hDiv7", ['vegeta', 'superVegeta']);
 }
-window.onload = init;
 
 
 

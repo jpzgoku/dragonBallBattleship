@@ -52,212 +52,125 @@ li {
 	box-sizing: border-box;
 	border: none
 }
-#goku {
-	background: no-repeat url(../images/gokuBlue.png);
-	background-size: cover;
-	background-color: #00ffff;
-}
 .goku {
 	background: no-repeat url(../images/gokuBlue.png);
-	background-size: cover;
-}
-#vegeta {
-	background: no-repeat url(../images/vegetaBlue2.png);
 	background-size: cover;
 	background-color: #00ffff;
 }
 .vegeta {
 	background: no-repeat url(../images/vegetaBlue2.png);
 	background-size: cover;
+	background-color: #00ffff;
 }
-#trunks {
-	background: no-repeat url(../images/trunks2.png) 100% 0%;
-	background-size: 150%;
-	background-color: #00FFFF;
+.superVegeta {
+	background: no-repeat url(../images/superVegeta.png);
+	background-size: cover;
+	background-color: #ffff00;
 }
 .trunks {
 	background: no-repeat url(../images/trunks2.png) 100% 0%;
 	background-size: 150%;
-}
-#beerus {
-	background: no-repeat url(../images/beerus.png);
-	background-size: 90%;
-	background-color: #885ead;
+	background-color: #00FFFF;
 }
 .beerus {
 	background: no-repeat url(../images/beerus.png);
 	background-size: 90%;
-}
-#piccolo {
-	background: no-repeat url(../images/piccolo.png);
-	background-size: cover;
-	background-color:#00CE00;
+	background-color: #885ead;
 }
 .piccolo {
 	background: no-repeat url(../images/piccolo.png);
 	background-size: cover;
+	background-color:#00CE00;
 }
-#gohan {
+.gohan {
 	background: no-repeat url(../images/gohan.png);
 	background-size: cover;
 	background-color: #ffff00;
 }
-.gohan {
-	background: no-repeat url(../images/gohan.png) 100% 100%;
-	background-size: 90%;
-}
-#tien {
+.tien {
 	background: no-repeat url(../images/tien.png);
 	background-size: cover;
 	background-color: white;
 }
-.tien {
-	background: no-repeat url(../images/tien.png);
-	background-size: cover;
-}
-#goten {
-	background: no-repeat url(../images/gotenksPose.png);
-	background-size: cover;
-	background-color: #ffff00;
-}
 .goten {
 	background: no-repeat url(../images/gotenksPose.png);
-	background-size: cover;
-}
-#gotenks {
-	background: no-repeat url(../images/gotenksSS3.png);
 	background-size: cover;
 	background-color: #ffff00;
 }
 .gotenks {
 	background: no-repeat url(../images/gotenksSS3.png);
 	background-size: cover;
-}
-#masterRoshi {
-	background: no-repeat url(../images/masterRoshi.png);
-	background-size: cover;
-	background-color: orange;
+	background-color: #ffff00;
 }
 .masterRoshi {
 	background: no-repeat url(../images/masterRoshi.png);
 	background-size: cover;
-}
-#krillin {
-	background: no-repeat url(../images/krillinAngry.png);
-	background-size: 90%;
 	background-color: orange;
 }
 .krillin {
 	background: no-repeat url(../images/krillinAngry.png);
 	background-size: 90%;
-}
-#frieza{
-	background: no-repeat url(../images/goldenFrieza.png);
-	background-size: cover;
-	background-color: #ffe76A;
+	background-color: orange;
 }
 .frieza{
 	background: no-repeat url(../images/goldenFrieza.png);
 	background-size: cover;
-}
-#black {
-	background: no-repeat url(../images/blackAngry.png);
-	background-size: cover;
-	background-color: #ffc0cb;
+	background-color: #ffe76A;
 }
 .black {
 	background: no-repeat url(../images/blackAngry.png);
 	background-size: cover;
+	background-color: #ffc0cb;
 }
-#zamasu {
+.zamasu {
 	background: no-repeat url(../images/zamasu.png);
 	background-size: cover;
 	background-color: #00ff80;
 }
-.zamasu {
-	background: no-repeat url(../images/zamasu.png) 50% 100%;
-	background-size: 90%;
-}
-#kidBuu {
-	background: no-repeat url(../images/buu.png);
-	background-size: cover;
-	background-color: #ff94ce;
-}
 .kidBuu {
 	background: no-repeat url(../images/buu.png);
-	background-size: cover;
-}
-#superBuu {
-	background: no-repeat url(../images/superBuu.png);
 	background-size: cover;
 	background-color: #ff94ce;
 }
 .superBuu {
-	background: no-repeat url(../images/superBuu.png);
-	background-size: cover;
-}
-#cell {
-	background: no-repeat url(../images/cell.png);
-	background-size: cover;
-	background-color: #00ff00;
+	background: no-repeat url(../images/superBuu2.png) 50% 0%;
+	background-size: 85%;
+	background-color: #ff94ce;
 }
 .cell {
 	background: no-repeat url(../images/cell.png);
 	background-size: cover;
-}
-#cellJr {
-	background: no-repeat url(../images/cellJr.png);
-	background-size: cover;
-	background-color: #48b3e7;
+	background-color: #00ff00;
 }
 .cellJr {
 	background: no-repeat url(../images/cellJr.png);
 	background-size: cover;
-}
-#imperfectCell {
-	background: no-repeat url(../images/imperfectCell.png);
-	background-size: cover;
-	background-color: #00a000;
+	background-color: #48b3e7;
 }
 .imperfectCell {
 	background: no-repeat url(../images/imperfectCell.png);
 	background-size: cover;
-}
-#android17 {
-	background: no-repeat url(../images/android17.png);
-	background-size: cover;
-	background-color: #ff1919;
+	background-color: #00a000;
 }
 .android17 {
 	background: no-repeat url(../images/android17.png);
 	background-size: cover;
-}
-#android19 {
-	background: no-repeat url(../images/android19.png);
-	background-size: cover;
-	background-color: #ffe166;
+	background-color: #ff1919;
 }
 .android19 {
 	background: no-repeat url(../images/android19.png);
 	background-size: cover;
-}
-#android20 {
-	background: no-repeat url(../images/android20Stare.png);
-	background-size: cover;
-	background-color: #ffa500;
+	background-color: #ffe166;
 }
 .android20 {
 	background: no-repeat url(../images/android20Stare.png);
 	background-size: cover;
-}
-#frost {
-	background: no-repeat url(../images/frostForm1.png);
-	background-size: cover;
-	background-color: #e9e9e9;
+	background-color: #ffa500;
 }
 .frost {
 	background: no-repeat url(../images/frostForm1.png);
 	background-size: cover;
+	background-color: #e9e9e9;
 }
 #board {
 	position: relative;
@@ -282,103 +195,103 @@ li {
 .gokuMessageBoard, .vegetaMessageBoard, .trunksMessageBoard {
 	color: #00ffff;
 }
-.gokuGameBoard, .vegetaGameBoard, .trunksGameBoard {
+.gokuBackground, .vegetaBackground, .trunksBackground {
 	background-color: #00ffff;
 }
 .beerusMessageBoard {
 	color: #885ead;
 }
-.beerusGameBoard {
+.beerusBackground {
 	background-color: #885ead;
 }
 .piccoloMessageBoard {
 	color: #00ce00;
 }
-.piccoloGameBoard {
+.piccoloBackground {
 	background-color: #00ce00;
 }
-.gohanMessageBoard, .gotenMessageBoard, .gotenksMessageBoard {
+.superVegetaMessageBoard, .gohanMessageBoard, .gotenMessageBoard, .gotenksMessageBoard {
 	color: #ffff00;
 }
-.gohanGameBoard, .gotenGameBoard, .gotenksGameBoard {
+.superVegetaBackground, .gohanBackground, .gotenBackground, .gotenksBackground {
 	background-color: #ffff00;
 }
 .tienMessageBoard {
 	color: white;
 }
-.tienGameBoard {
+.tienBackground {
 	background-color: white;
 }
 .shenronMessageBoard {
 	color: #00b200;
 }
-.shenronGameBoard {
+.shenronBackground {
 	background-color: #00b200;
 }
 .blackMessageBoard {
 	color: #ffc0cb;
 }
-.blackGameBoard {
+.blackBackground {
 	background-color: #ffc0cb;
 }
 .zamasuMessageBoard {
 	color: #00ff80;
 }
-.zamasuGameBoard {
+.zamasuBackground {
 	background-color: #00ff80;
 }
 .freizaMessageBoard {
 	color: #ffe76a;
 }
-.freizaGameBoard {
+.freizaBackground {
 	background-color: #ffe76a;
 }
 .kidBuuMessageBoard, .superBuuMessageBoard {
 	color: #ff94ce;
 }
-.kidBuuGameBoard, .superBuuGameBoard {
+.kidBuuBackground, .superBuuBackground {
 	background-color: #ff94ce;
 }
 .cellMessageBoard {
 	color: #00ff00;
 }
-.cellGameBoard {
+.cellBackground {
 	background-color: #00ff00;
 }
 .imperfectCellMessageBoard {
 	color: #00a000;
 }
-.imperfectCellGameBoard {
+.imperfectCellBackground {
 	background-color: #00a000;
 }
 .cellJrMessageBoard {
 	color: #48b3e7;
 }
-.cellJrGameBoard {
+.cellJrBackground {
 	background-color: #48b3e7;
 }
 .frostMessageBoard {
 	color: #e9e9e9;
 }
-.frostGameBoard {
+.frostBackground {
 	background-color: #e9e9e9;
 }
 .android17MessageBoard {
 	color: #ff1919;
 }
-.android17GameBoard {
+.android17Background {
 	background-color: #ff1919;
 }
 .android19MessageBoard {
 	color: #ffe166;
 }
-.android19GameBoard {
+.android19Background {
 	background-color: #ffe166;
 }
 .android20MessageBoard {
 	color: #ffa500;
 }
-.android20GameBoard {
+.android20Background {
 	background-color: #ffa500;
 }
 #left {
@@ -411,6 +324,7 @@ td {
 	bottom: 0;
 	height: 320px;
 	width: 320px;
+	background-color: transparent;
 }
 #imgPlayer1 {
 	left: -35px;
