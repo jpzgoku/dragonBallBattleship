@@ -24,11 +24,11 @@ var view = {
 
 	player1CharacterSelectButton: function() {
 		$("#player1CS").on('click', function() {
-			$("#heroSelect").css('display', 'block');
+			$("#heroSelect").removeClass('hidden');
 			$('#messageAreaPlayer1').removeClass();
 			$('#left').removeClass();
 			$("#imgPlayer1").removeClass();
-			$("#board").css('display', 'none');
+			$("#board").addClass('hidden');
 
 			displayHero(".goku", 'gokuMessageBoard', 'gokuBackground', 'goku');
 			displayHero(".vegeta", 'vegetaMessageBoard', 'vegetaBackground', 'vegeta');
@@ -52,19 +52,19 @@ var view = {
 				$('#left').addClass(characterBackground);
 				$('#imgPlayer1').removeClass();
 				$('#imgPlayer1').addClass(characterPic);
-				$("#heroSelect").css('display', 'none');
-				$("#board").css('display', 'block');
+				$("#heroSelect").addClass('hidden');
+				$("#board").removeClass('hidden');
 			});
 		};
 	},
 
 	player2CharacterSelectButton: function() {
 		$("#player2CS").on('click', function() {
-			$("#villianSelect").css('display', 'block');
+			$("#villianSelect").removeClass('hidden');
 			$('#messageAreaPlayer2').removeClass();
 			$('#right').removeClass();
 			$("#imgPlayer2").removeClass();
-			$("#board").css('display', 'none');
+			$("#board").addClass('hidden');
 
 			displayVillian(".black", 'blackMessageBoard', 'blackBackground', 'black');
 			displayVillian(".blackRose", 'blackRoseMessageBoard', 'blackRoseBackground', 'blackRose');
@@ -93,8 +93,8 @@ var view = {
 				$('#right').addClass(characterBackground);
 				$('#imgPlayer2').removeClass();
 				$('#imgPlayer2').addClass(characterPic);
-				$("#villianSelect").css('display', 'none');
-				$("#board").css('display', 'block');
+				$("#villianSelect").addClass('hidden');
+				$("#board").removeClass('hidden');
 			});
 		};
 	}, 
@@ -428,16 +428,14 @@ var controllerPlayer2 = {
 function singlePlayerGameButton() {
 	$("#1Player").click(function() {
 		play1PlayerGame();
-		$("#numPlayerSelect").css('display', 'none');
-		$("#newCharacterSelect").css('display', 'block');
+		$("#newCharacterSelect").removeClass('hidden');
 	});
 };
 
 function twoPlayerGameButton() {
 	$("#2Player").click(function() {
 		play2PlayerGame();
-		$("#numPlayerSelect").css('display', 'none');
-		$("#newCharacterSelect").css('display', 'block');
+		$("#newCharacterSelect").removeClass('hidden');
 	});
 };
 
@@ -458,29 +456,38 @@ function newGameButton() {
 								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
 		model.generateShipLocationsPlayer1();
 		model.generateShipLocationsPlayer2();
+		$("#numPlayerSelect").removeClass('hidden');
 	});
 };
 
 function play1PlayerGame() {
-	$('#right').find('td').on('click', function() {
-		if (!model.allShipsSunkPlayer1()) {
-			var runThroughs = 0;
-			var guess = $(this).attr('id');
-			controllerPlayer1.processGuessPlayer1(guess);
-			controllerPlayer2.computerMakeGuess(runThroughs);	
-		}
-	});
+	$('#right').find('td').on('click', singlePlayerRules);
+	$('#board').find('td').off('click', twoPlayerGameRules);
+};
+
+function singlePlayerRules() {
+	if (!model.allShipsSunkPlayer1()) {
+		var runThroughs = 0;
+		var guess = $(this).attr('id');
+		controllerPlayer1.processGuessPlayer1(guess);
+		controllerPlayer2.computerMakeGuess(runThroughs);
+		$("#numPlayerSelect").addClass('hidden');	
+	}
 };
 
 function play2PlayerGame() {
-	$('#board').find('td').on('click', function() {
-		var guess = $(this).attr('id');
-		if (controllerPlayer1.guesses <= controllerPlayer2.guesses) {
-			controllerPlayer1.processGuessPlayer1(guess);
-		} else {
-			controllerPlayer2.processGuessPlayer2(guess);
-		}
-	});
+	$('#board').find('td').on('click', twoPlayerGameRules);
+	$('#right').find('td').off('click', singlePlayerRules);
+};
+
+function twoPlayerGameRules() {
+	var guess = $(this).attr('id');
+	$("#numPlayerSelect").addClass('hidden');
+	if (controllerPlayer1.guesses <= controllerPlayer2.guesses) {
+		controllerPlayer1.processGuessPlayer1(guess);
+	} else {
+		controllerPlayer2.processGuessPlayer2(guess);
+	}
 };
 
 window.onload = function() {

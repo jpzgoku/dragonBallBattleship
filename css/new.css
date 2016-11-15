@@ -22,9 +22,6 @@ li {
 #header li {
 	cursor: default;
 }
-#newCharacterSelect {
-	display: none;
-}
 .menu {
 	background-color: transparent;
 	border: none;
@@ -41,7 +38,6 @@ li {
 	width: 960px;
 	position: relative;
 	text-align: center;
-	display: none;
 	margin: auto;
 	border-spacing: 0;
 }
@@ -105,7 +101,7 @@ li {
 .gotenks {
 	background: no-repeat url(../images/gotenks.png);
 	background-size: cover;
-	background-color: #643464;
+	background-color: #ffe246;
 }
 .gotenksSS {
 	background: no-repeat url(../images/gotenksSS.png);
@@ -143,8 +139,8 @@ li {
 	background-color: #ffc0cb;
 }
 .zamasu {
-	background: no-repeat url(../images/zamasu.png);
-	background-size: cover;
+	background: no-repeat url(../images/zamasu.png) 50% 100%;
+	background-size: 90%;
 	background-color: #00ff80;
 }
 .babidi {
@@ -178,8 +174,8 @@ li {
 	background-color: #48b3e7;
 }
 .semiPerfectCell {
-	background: no-repeat url(../images/cellStage2.jpg) 0% 0%;
-	background-size: 130%;
+	background: no-repeat url(../images/semiPerfectCell.png) 60% 10%;
+	background-size: 170%;
 	background-color: #00e500;
 }
 .imperfectCell {
@@ -261,10 +257,10 @@ li {
 	background-color: #ffff00;
 }
 .gotenksMessageBoard {
-	color: #643464;
+	color: #ffe246;
 }
 .gotenksBackground {
-	background-color: #643464;
+	background-color: #ffe246;
 }
 .tienMessageBoard {
 	color: white;
@@ -412,12 +408,15 @@ td {
 #imgPlayer2 {
 	right: -35px;
 }
+.hidden {
+	display: none;
+}
 .hit {
-	background: url("../images/hit.png") no-repeat center center;
+	background: url(../images/hit.png) no-repeat center center;
 	background-size: contain;
 }
 .miss {
-	background: url("../images/miss.png") no-repeat center center;
+	background: url(../images/miss.png) no-repeat center center;
 	background-size: contain;
 }
 .shade {
