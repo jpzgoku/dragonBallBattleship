@@ -23,7 +23,7 @@ var view = {
 	},
 
 	player1CharacterSelectButton: function() {
-		$("#player1CS").click(function() {
+		$("#player1CS").on('click', function() {
 			$("#heroSelect").css('display', 'block');
 			$('#messageAreaPlayer1').removeClass();
 			$('#left').removeClass();
@@ -35,10 +35,13 @@ var view = {
 			displayHero(".superVegeta", 'superVegetaMessageBoard', 'superVegetaBackground', 'superVegeta');
 			displayHero(".beerus", 'beerusMessageBoard', 'beerusBackground', 'beerus');
 			displayHero(".trunks", 'trunksMessageBoard', 'trunksBackground', 'trunks');
+			displayHero(".trunksSS", 'trunksSSMessageBoard', 'trunksSSBackground', 'trunksSS');
 			displayHero(".gohan", 'gohanMessageBoard', 'gohanBackground', 'gohan');			
 			displayHero(".piccolo", 'piccoloMessageBoard', 'piccoloBackground', 'piccolo');
 			displayHero(".tien", 'tienMessageBoard', 'tienBackground', 'tien');
 			displayHero(".gotenks", 'gotenksMessageBoard', 'gotenksBackground', 'gotenks');
+			displayHero(".gotenksSS", 'gotenksSSMessageBoard', 'gotenksSSBackground', 'gotenksSS');
+			displayHero(".gotenksSS3", 'gotenksSS3MessageBoard', 'gotenksSS3Background', 'gotenksSS3');
 		});
 
 		function displayHero(character, characterMessageBoard, characterBackground, characterPic) {
@@ -55,17 +58,8 @@ var view = {
 		};
 	},
 
-	toggleCharacters: function(divNumber, array) {
-		$(divNumber).contextmenu(function() {
-			var classes = array;
-			$(divNumber).each(function() {
-				this.className = classes[($.inArray(this.className, classes)+1)%classes.length];
-			})
-		});
-	},
-
 	player2CharacterSelectButton: function() {
-		$("#player2CS").click(function() {
+		$("#player2CS").on('click', function() {
 			$("#villianSelect").css('display', 'block');
 			$('#messageAreaPlayer2').removeClass();
 			$('#right').removeClass();
@@ -73,28 +67,46 @@ var view = {
 			$("#board").css('display', 'none');
 
 			displayVillian(".black", 'blackMessageBoard', 'blackBackground', 'black');
+			displayVillian(".blackRose", 'blackRoseMessageBoard', 'blackRoseBackground', 'blackRose');
 			displayVillian(".zamasu", 'zamasuMessageBoard', 'zamasuBackground', 'zamasu');
 			displayVillian(".frieza", 'freizaMessageBoard', 'freizaBackground', 'frieza');
-			displayVillian(".kidBuu", 'kidBuuMessageBoard', 'kidBuuBackground', 'kidBuu');
+			displayVillian(".babidi", 'babidiMessageBoard', 'babidiBackground', 'babidi');
+			displayVillian(".evilBuu", 'evilBuuMessageBoard', 'evilBuuBackground', 'evilBuu');
 			displayVillian(".superBuu", 'superBuuMessageBoard', 'superBuuBackground', 'superBuu');
+			displayVillian(".kidBuu", 'kidBuuMessageBoard', 'kidBuuBackground', 'kidBuu');
 			displayVillian(".cell", 'cellMessageBoard', 'cellBackground', 'cell');
+			displayVillian(".semiPerfectCell", 'semiPerfectCellMessageBoard', 'semiPerfectCellBackground', 'semiPerfectCell');
 			displayVillian(".imperfectCell", 'imperfectCellMessageBoard', 'imperfectCellBackground', 'imperfectCell');
 			displayVillian(".cellJr", 'cellJrMessageBoard', 'cellJrBackground', 'cellJr');
 			displayVillian(".frost", 'frostMessageBoard', 'frostBackground', 'frost');
 			displayVillian(".android17",'android17MessageBoard', 'android17Background', 'android17');
+			displayVillian(".android18",'android18MessageBoard', 'android18Background', 'android18');
 			displayVillian(".android19",'android19MessageBoard', 'android19Background', 'android19');
 			displayVillian(".android20",'android20MessageBoard', 'android20Background', 'android20');
 		});
 
 		function displayVillian(character, characterMessageBoard, characterBackground, characterPic) {
 			$(character).click(function() {
+				$('#messageAreaPlayer2').removeClass();
 				$('#messageAreaPlayer2').addClass(characterMessageBoard);
+				$('#right').removeClass();
 				$('#right').addClass(characterBackground);
+				$('#imgPlayer2').removeClass();
 				$('#imgPlayer2').addClass(characterPic);
 				$("#villianSelect").css('display', 'none');
 				$("#board").css('display', 'block');
 			});
 		};
+	}, 
+
+	toggleCharacters: function(divNumber, array, whichPlayer) {
+		$(divNumber).contextmenu(function() {
+			var classes = array;
+			$(divNumber).each(function() {
+				this.className = classes[($.inArray(this.className, classes)+1)%classes.length];
+				$(whichPlayer).trigger('click');
+			})
+		});
 	}
 };
 
@@ -479,7 +491,14 @@ window.onload = function() {
 	newGameButton();
 	model.generateShipLocationsPlayer1();
 	model.generateShipLocationsPlayer2();
-	view.toggleCharacters("#hDiv7", ['vegeta', 'superVegeta']);
+
+	view.toggleCharacters("#hDiv4", ['trunks', 'trunksSS'], "#player1CS");
+	view.toggleCharacters("#hDiv5", ['gotenks', 'gotenksSS', 'gotenksSS3'], "#player1CS");
+	view.toggleCharacters("#hDiv7", ['vegeta', 'superVegeta'], "#player1CS");
+	
+	view.toggleCharacters("#vDiv6", ['black', 'blackRose'], "#player2CS");
+	view.toggleCharacters("#vDiv8", ['kidBuu', 'evilBuu', 'superBuu'], "#player2CS");
+	view.toggleCharacters("#vDiv10", ['imperfectCell', 'semiPerfectCell', 'cell'], "#player2CS");
 }
 
 

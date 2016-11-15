@@ -58,7 +58,7 @@ li {
 	background-color: #00ffff;
 }
 .vegeta {
-	background: no-repeat url(../images/vegetaBlue2.png);
+	background: no-repeat url(../images/vegetaBlue.png);
 	background-size: cover;
 	background-color: #00ffff;
 }
@@ -68,9 +68,14 @@ li {
 	background-color: #ffff00;
 }
 .trunks {
-	background: no-repeat url(../images/trunks2.png) 100% 0%;
+	background: no-repeat url(../images/trunks.png) 100% 0%;
 	background-size: 150%;
 	background-color: #00FFFF;
+}
+.trunksSS {
+	background: no-repeat url(../images/trunksSS.png);
+	background-size: cover;
+	background-color: #ffff00;
 }
 .beerus {
 	background: no-repeat url(../images/beerus.png);
@@ -83,8 +88,8 @@ li {
 	background-color:#00CE00;
 }
 .gohan {
-	background: no-repeat url(../images/gohan.png);
-	background-size: cover;
+	background: no-repeat url(../images/gohan.png) 100% 100%;
+	background-size: 90%;
 	background-color: #ffff00;
 }
 .tien {
@@ -98,6 +103,16 @@ li {
 	background-color: #ffff00;
 }
 .gotenks {
+	background: no-repeat url(../images/gotenks.png);
+	background-size: cover;
+	background-color: #643464;
+}
+.gotenksSS {
+	background: no-repeat url(../images/gotenksSS.png);
+	background-size: cover;
+	background-color: #ffff00;
+}
+.gotenksSS3 {
 	background: no-repeat url(../images/gotenksSS3.png);
 	background-size: cover;
 	background-color: #ffff00;
@@ -108,7 +123,7 @@ li {
 	background-color: orange;
 }
 .krillin {
-	background: no-repeat url(../images/krillinAngry.png);
+	background: no-repeat url(../images/krillin.png);
 	background-size: 90%;
 	background-color: orange;
 }
@@ -118,7 +133,12 @@ li {
 	background-color: #ffe76A;
 }
 .black {
-	background: no-repeat url(../images/blackAngry.png);
+	background: no-repeat url(../images/black.png) 0% 0%;
+	background-size: 130%;
+	background-color: #6b6b6b;
+}
+.blackRose {
+	background: no-repeat url(../images/blackRose.png);
 	background-size: cover;
 	background-color: #ffc0cb;
 }
@@ -127,25 +147,40 @@ li {
 	background-size: cover;
 	background-color: #00ff80;
 }
-.kidBuu {
-	background: no-repeat url(../images/buu.png);
-	background-size: cover;
-	background-color: #ff94ce;
+.babidi {
+	background: no-repeat url(../images/babidi.png) 200% -1000%;
+	background-size: 95%;
+	background-color: orange;
+}
+.evilBuu {
+	background: no-repeat url(../images/evilBuu.png) 0% 25%;
+	background-size: 110%;
+	background-color: #bdbdbd;
 }
 .superBuu {
 	background: no-repeat url(../images/superBuu2.png) 50% 0%;
 	background-size: 85%;
 	background-color: #ff94ce;
 }
-.cell {
-	background: no-repeat url(../images/cell.png);
+.kidBuu {
+	background: no-repeat url(../images/kidBuu.png);
 	background-size: cover;
+	background-color: #ff94ce;
+}
+.cell {
+	background: no-repeat url(../images/cell.png) 0% 10%;
+	background-size: 130%;
 	background-color: #00ff00;
 }
 .cellJr {
 	background: no-repeat url(../images/cellJr.png);
 	background-size: cover;
 	background-color: #48b3e7;
+}
+.semiPerfectCell {
+	background: no-repeat url(../images/cellStage2.jpg) 0% 0%;
+	background-size: 130%;
+	background-color: #00e500;
 }
 .imperfectCell {
 	background: no-repeat url(../images/imperfectCell.png);
@@ -156,6 +191,11 @@ li {
 	background: no-repeat url(../images/android17.png);
 	background-size: cover;
 	background-color: #ff1919;
+}
+.android18 {
+	background: no-repeat url(../images/android18second.png) ;
+	background-size: 80%;
+	background-color: #4889d8;
 }
 .android19 {
 	background: no-repeat url(../images/android19.png);
@@ -210,11 +250,21 @@ li {
 .piccoloBackground {
 	background-color: #00ce00;
 }
-.superVegetaMessageBoard, .gohanMessageBoard, .gotenMessageBoard, .gotenksMessageBoard {
+.superVegetaMessageBoard, .trunksSSMessageBoard, 
+.gohanMessageBoard, .gotenMessageBoard, 
+.gotenksSSMessageBoard, .gotenksSS3MessageBoard {
 	color: #ffff00;
 }
-.superVegetaBackground, .gohanBackground, .gotenBackground, .gotenksBackground {
+.superVegetaBackground, .trunksSSBackground, 
+.gohanBackground, .gotenBackground, 
+.gotenksSSBackground, .gotenksSS3Background {
 	background-color: #ffff00;
+}
+.gotenksMessageBoard {
+	color: #643464;
+}
+.gotenksBackground {
+	background-color: #643464;
 }
 .tienMessageBoard {
 	color: white;
@@ -229,9 +279,15 @@ li {
 	background-color: #00b200;
 }
 .blackMessageBoard {
-	color: #ffc0cb;
+	color: #6b6b6b;
 }
 .blackBackground {
+	background-color: #6b6b6b;
+}
+.blackRoseMessageBoard {
+	color: #ffc0cb;
+}
+.blackRoseBackground {
 	background-color: #ffc0cb;
 }
 .zamasuMessageBoard {
@@ -246,6 +302,18 @@ li {
 .freizaBackground {
 	background-color: #ffe76a;
 }
+.babidiMessageBoard {
+	color: orange;
+}
+.babidiBackground {
+	background-color: orange;
+}
+.evilBuuMessageBoard {
+	color: #bdbdbd;
+}
+.evilBuuBackground {
+	background-color: #bdbdbd;
+}
 .kidBuuMessageBoard, .superBuuMessageBoard {
 	color: #ff94ce;
 }
@@ -257,6 +325,12 @@ li {
 }
 .cellBackground {
 	background-color: #00ff00;
+}
+.semiPerfectCellMessageBoard {
+	color: #00e500;
+}
+.semiPerfectCellBackground {
+	background-color: #00e500;
 }
 .imperfectCellMessageBoard {
 	color: #00a000;
@@ -281,6 +355,12 @@ li {
 }
 .android17Background {
 	background-color: #ff1919;
+}
+.android18MessageBoard {
+	color: #4889d8;
+}
+.android18Background {
+	background-color: #4889d8;
 }
 .android19MessageBoard {
 	color: #ffe166;
