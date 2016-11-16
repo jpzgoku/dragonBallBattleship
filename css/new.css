@@ -33,6 +33,18 @@ li {
 .menu:hover {
 	color: #ffff00;
 }
+#cpuSelect1,
+#cpuSelect2 {
+	color: white;
+	display: inline-block;
+	margin: 0 50px;
+}
+#cpuSelect1 {
+	float: left;
+}
+#cpuSelect2 {
+	float: right;
+}
 #heroSelect,
 #villianSelect {
 	width: 960px;

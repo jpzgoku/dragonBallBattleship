@@ -107,6 +107,28 @@ var view = {
 				$(whichPlayer).trigger('click');
 			})
 		});
+	},
+
+	newGameButton: function() {
+		$("#clear").click(function() {
+			$('#left').find('td').removeClass('hit miss');
+			$('#right').find('td').removeClass('hit miss');
+			view.displayMessagePlayer1("");
+			view.displayMessagePlayer2("");
+			controllerPlayer1.guesses = 0;
+			controllerPlayer2.guesses = 0;
+			controllerPlayer1.previousGuesses.length = 0;
+			controllerPlayer2.previousGuesses.length = 0;
+			model.shipsPlayer1 =   [{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+									{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+									{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
+			model.shipsPlayer2 =   [{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+									{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
+									{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
+			model.generateShipLocationsPlayer1();
+			model.generateShipLocationsPlayer2();
+			$("#numPlayerSelect").removeClass('hidden');
+		});
 	}
 };
 
@@ -132,7 +154,7 @@ var model = {
 				ship.hits[index] = "hit";
 				view.displayHitPlayer1(guess);
 				view.displayMessagePlayer1("HIT!");
-				if (this.isSunkPlayer1(ship)) {
+				if (this.isSunk(ship)) {
 					view.displayMessagePlayer1("You completed the combo!");
 					this.shipsPlayer1[i].sunk = true;
 				}
@@ -140,7 +162,7 @@ var model = {
 			}
 		}
 		view.displayMissPlayer1(guess);
-		(this.allShipsSunkPlayer1()) ? view.displayMessagePlayer1("You win! You landed all 3 combos in " + controllerPlayer1.guesses + " attemps!") :
+		(this.allShipsSunk(this.shipsPlayer1.length, this.shipsPlayer1)) ? view.displayMessagePlayer1("You win! You landed all 3 combos in " + controllerPlayer1.guesses + " attemps!") :
 									   view.displayMessagePlayer1("You missed.");
 		return false;
 	},
@@ -153,7 +175,7 @@ var model = {
 				ship.hits[index] = "hit";
 				view.displayHitPlayer2(guess);
 				view.displayMessagePlayer2("HIT!");
-				if (this.isSunkPlayer2(ship)) {
+				if (this.isSunk(ship)) {
 					view.displayMessagePlayer2("You completed the combo!");
 					this.shipsPlayer2[i].sunk = true;
 				}
@@ -161,12 +183,12 @@ var model = {
 			}
 		}
 		view.displayMissPlayer2(guess);
-		(this.allShipsSunkPlayer2()) ? view.displayMessagePlayer2("You win! You landed all 3 combos in " + controllerPlayer2.guesses + " attemps!") :
+		(this.allShipsSunk(this.shipsPlayer2.length, this.shipsPlayer2)) ? view.displayMessagePlayer2("You win! You landed all 3 combos in " + controllerPlayer2.guesses + " attemps!") :
 									   view.displayMessagePlayer2("You missed.");
 		return false;
 	},
 
-	isSunkPlayer1: function(ship) {
+	isSunk: function(ship) {
 		for (var i = 0; i < this.shipLength; i++) {
 			if (ship.hits[i] !== "hit") {
 				return false;
@@ -175,49 +197,31 @@ var model = {
 		return true;
 	},
 
-	isSunkPlayer2: function(ship) {
-		for (var i = 0; i < this.shipLength; i++) {
-			if (ship.hits[i] !== "hit") {
-				return false;
-			}
-		}
-		return true;
-	},
-
-	allShipsSunkPlayer1: function() {
-		for (var i = 0; i < this.shipsPlayer1.length; i++) {
-			if (this.shipsPlayer1[i].sunk === false) {
+	allShipsSunk: function(playerShipsLength, playerShips) {
+		for (var i = 0; i < playerShipsLength; i++) {
+			if (playerShips[i].sunk === false) {
 				return false
 			}
 		}
 		return true;
 	},
 
-	allShipsSunkPlayer2: function() {
-		for (var i = 0; i < this.shipsPlayer2.length; i++) {
-			if (this.shipsPlayer2[i].sunk === false) {
-				return false
-			}
-		}
-		return true;
-	},
-
-	generateShipLocationsPlayer1: function() {
+	generateShipLocationsPlayer1: function() {		
 		var locations;
 		for (var i = 0; i < this.numShipsPlayer1; i++) {
 			do {
 				locations = this.generateShipPlayer1();
-			} while (this.collisionPlayer1(locations));
+			} while (this.collision(locations, this.numShipsPlayer1, this.shipsPlayer1));
 			this.shipsPlayer1[i].locations = locations; 
 		}
 	},
 
-	generateShipLocationsPlayer2: function() {
+	generateShipLocationsPlayer2: function() {		
 		var locations;
 		for (var i = 0; i < this.numShipsPlayer2; i++) {
 			do {
 				locations = this.generateShipPlayer2();
-			} while (this.collisionPlayer2(locations));
+			} while (this.collision(locations, this.numShipsPlayer2, this.shipsPlayer2));
 			this.shipsPlayer2[i].locations = locations; 
 		}
 	},
@@ -268,9 +272,9 @@ var model = {
 		return newShipLocations;
 	},
 
-	collisionPlayer1: function(locations) {
-		for (var i = 0; i < this.numShipsPlayer1; i++) {
-			var ship = model.shipsPlayer1[i];
+	collision: function(locations, numShips, modelShips) {
+		for (var i = 0; i < numShips; i++) {
+			var ship = modelShips[i];
 			for (var j = 0; j < locations.length; j++) {
 				if (ship.locations.indexOf(locations[j]) >= 0) {
 					return true;
@@ -278,39 +282,16 @@ var model = {
 			}
 		}
 		return false;
-	},
-
-	collisionPlayer2: function(locations) {
-		for (var i = 0; i < this.numShipsPlayer2; i++) {
-			var ship = model.shipsPlayer2[i];
-			for (var j = 0; j < locations.length; j++) {
-				if (ship.locations.indexOf(locations[j]) >= 0) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}, 
-};
-
-function parseGuessPlayer1(guess) {
-	var row = guess.charAt(0);
-	var column = guess.charAt(1);
-	if (column > 4) {
-		return row + column;
-	} else {
-		view.displayMessagePlayer1("Don't attack yourself!");
 	}
-	return null;
 };
 
-function parseGuessPlayer2(guess) {
+function parseGuess(guess, conditional, message) {
 	var row = guess.charAt(0);
 	var column = guess.charAt(1);
-	if (column < 5) {
+	if (conditional) {
 		return row + column;
 	} else {
-		view.displayMessagePlayer2("Don't attack yourself!");
+		message("Don't attack yourself!");
 	}
 	return null;
 };
@@ -319,16 +300,95 @@ var controllerPlayer1 = {
 	guesses: 0,
 
 	processGuessPlayer1: function(guess) {
-		var location = parseGuessPlayer1(guess);
+		var location = parseGuess(guess, "column > 4", view.displayMessagePlayer1);
 		if (location) {
-			if (!model.allShipsSunkPlayer1()) {
+			if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
 				this.guesses++;
 			}
 			model.firePlayer1(location);
-			if (model.allShipsSunkPlayer1()) {
+			if (model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
 				view.displayMessagePlayer1("You win! You landed all 3 combos in " + this.guesses + " attemps!");
 			}
 		}
+	} ,
+
+	previousGuesses: [],
+
+	computerMakeGuess: function(runThroughs) {
+
+		var randomNumber = function() {
+			var num1 = Math.floor(Math.random() * model.boardSizeRow).toString();
+			var num2 = Math.floor((Math.random() * model.boardSizeCol) + model.boardSizeCol).toString();
+			return num1 + num2;
+		};
+
+		var educatedGuess = function() {
+			for (var i = 0; i < model.shipsPlayer1.length; i++) {
+				for( var j = 0; j < model.shipsPlayer1.length; j++) {
+					if (model.shipsPlayer1[i].hits[j] === 'hit' && model.shipsPlayer1[i].sunk !== true) {
+						var num1 = model.shipsPlayer1[i].locations[j].charAt(0);
+						var num2 = model.shipsPlayer1[i].locations[j].charAt(1);
+						if (runThroughs === 0) {
+							guess = (Number(num1) + 1) + num2;
+							return checkIfOnBoard(guess);
+						} else if (runThroughs === 1) {
+							guess = (Number(num1) - 1) + num2;
+							return checkIfOnBoard(guess);
+						} else if (runThroughs === 2) {
+							guess = num1 + (Number(num2) - 1);
+							return checkIfOnBoard(guess);
+						} else if (runThroughs === 3) {
+							guess = num1 + (Number(num2) + 1);
+							return checkIfOnBoard(guess);
+						} else if (runThroughs > 3) {
+							var k = j - 1;
+							if (model.shipsPlayer1[i].hits[k] === 'hit') {
+								if (runThroughs === 4) {
+									guess = (Number(num1) + 1) + num2;
+									return checkIfOnBoard(guess);
+								} else if (runThroughs === 5) {
+									guess = (Number(num1) - 1) + num2;
+									return checkIfOnBoard(guess);
+								} else if (runThroughs === 6) {
+									guess = num1 + (Number(num2) - 1);
+									return checkIfOnBoard(guess);
+								} else if (runThroughs === 7) {
+									guess = num1 + (Number(num2) + 1);
+									return checkIfOnBoard(guess);
+								}
+							}
+						}
+					} 
+				}
+			}
+			return randomNumber();
+		};
+
+		function checkIfOnBoard(guess) {
+			runThroughs++;
+			var firstDigit = String(guess).charAt(0)
+			var secondDigit = String(guess).charAt(1);
+			if (firstDigit < 0 || firstDigit > model.boardSizeRow - 1 || 
+				secondDigit < model.boardSizeCol || guess.length !== 2) {
+				return educatedGuess();
+			}
+			return guess;
+		};
+
+		console.log(runThroughs);
+
+		var guess = (this.guesses === 0) ? randomNumber() : educatedGuess();
+		
+		for (var i = 0; i < this.previousGuesses.length; i++) {
+			if (guess === this.previousGuesses[i]) {
+				console.log("Alert! Dumplicate Number!");
+				return this.computerMakeGuess(runThroughs);
+			} // if there is a duplicate number then the computer will make a new guess
+		};
+		
+		this.previousGuesses.push(guess);
+		console.log(this.previousGuesses);
+		this.processGuessPlayer1(guess);
 	}
 };
 
@@ -336,17 +396,18 @@ var controllerPlayer2 = {
 	guesses: 0,
 
 	processGuessPlayer2: function(guess) {
-		var location = parseGuessPlayer2(guess);
+		var location = parseGuess(guess, 'column < 5', view.displayMessagePlayer2);
 		if (location) {
-			if (!model.allShipsSunkPlayer2()) {
+			if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
 				this.guesses++;
 			}
 			model.firePlayer2(location);
-			if (model.allShipsSunkPlayer2()) {
+			if (model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
 				view.displayMessagePlayer2("You win! You landed all 3 combos in " + this.guesses + " attemps!");
 			}
 		}
 	},
+	
 	previousGuesses: [],
 
 	computerMakeGuess: function(runThroughs) {
@@ -401,8 +462,11 @@ var controllerPlayer2 = {
 
 		function checkIfOnBoard(guess) {
 			runThroughs++;
+			var firstDigit = String(guess).charAt(0);
 			var secondDigit = String(guess).charAt(1);
-			if (guess > (String(model.boardSizeRow - 1) + String(model.boardSizeCol - 1)) || guess.length !== 2 || Number(secondDigit) === model.boardSizeCol) {
+			/*if (guess > (String(model.boardSizeRow - 1) + String(model.boardSizeCol - 1)) || guess.length !== 2 || Number(secondDigit) === model.boardSizeCol) {*/
+			if (firstDigit < 0 || firstDigit > model.boardSizeRow - 1 ||
+				secondDigit >= model.boardSizeCol || guess.length !== 2) {
 				return educatedGuess();
 			}
 			return guess;
@@ -425,6 +489,25 @@ var controllerPlayer2 = {
 	}
 };
 
+var vegeta = {
+
+	specialMoveUsage: 0,
+
+	bigBang: function() {
+		$('#right').find('td').contextmenu(function() {
+
+			var guess = $(this).attr('id');
+			var row = guess.charAt(0);
+			var column = guess.charAt(1);
+			controllerPlayer1.processGuessPlayer1(guess);
+			controllerPlayer1.processGuessPlayer1(String(Number(row) + 1) + column);
+			controllerPlayer1.processGuessPlayer1(String(Number(row) - 1) + column);
+			controllerPlayer1.processGuessPlayer1(row + String(Number(column) + 1));
+			controllerPlayer1.processGuessPlayer1(row + String(Number(column) - 1));			
+		});
+	}
+};
+
 function singlePlayerGameButton() {
 	$("#1Player").click(function() {
 		play1PlayerGame();
@@ -439,63 +522,66 @@ function twoPlayerGameButton() {
 	});
 };
 
-function newGameButton() {
-	$("#clear").click(function() {
-		$('#left').find('td').removeClass('hit miss');
-		$('#right').find('td').removeClass('hit miss');
-		view.displayMessagePlayer1("");
-		view.displayMessagePlayer2("");
-		controllerPlayer1.guesses = 0;
-		controllerPlayer2.guesses = 0;
-		controllerPlayer2.previousGuesses.length = 0;
-		model.shipsPlayer1 =   [{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
-								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
-								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
-		model.shipsPlayer2 =   [{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
-								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false },
-								{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
-		model.generateShipLocationsPlayer1();
-		model.generateShipLocationsPlayer2();
-		$("#numPlayerSelect").removeClass('hidden');
-	});
-};
-
 function play1PlayerGame() {
-	$('#right').find('td').on('click', singlePlayerRules);
-	$('#board').find('td').off('click', twoPlayerGameRules);
+	/*$('#right').find('td').on('click', singlePlayerRules); // origional one */
+	$('#left').find('td').on('click', singlePlayerRules); // new one
+	$('#right').find('td').off('click', player1Turn);
+	$('#left').find('td').off('click', player2Turn);
+	/*$('#right').find('td').on('contextmenu', vegeta.bigBang);*/
 };
 
-function singlePlayerRules() {
-	if (!model.allShipsSunkPlayer1()) {
+function play2PlayerGame() {
+	$('#right').find('td').off('click', singlePlayerRules);
+	$('#right').find('td').on('click', player1Turn);
+	$('#left').find('td').off('click', player2Turn);
+};
+
+/*function singlePlayerRules() { // original one
+	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
 		var runThroughs = 0;
 		var guess = $(this).attr('id');
 		controllerPlayer1.processGuessPlayer1(guess);
 		controllerPlayer2.computerMakeGuess(runThroughs);
 		$("#numPlayerSelect").addClass('hidden');	
 	}
-};
+};*/
 
-function play2PlayerGame() {
-	$('#board').find('td').on('click', twoPlayerGameRules);
-	$('#right').find('td').off('click', singlePlayerRules);
-};
-
-function twoPlayerGameRules() {
-	var guess = $(this).attr('id');
-	$("#numPlayerSelect").addClass('hidden');
-	if (controllerPlayer1.guesses <= controllerPlayer2.guesses) {
-		controllerPlayer1.processGuessPlayer1(guess);
-	} else {
+function singlePlayerRules() { // new one
+	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
+		var runThroughs = 0;
+		var guess = $(this).attr('id');
 		controllerPlayer2.processGuessPlayer2(guess);
+		controllerPlayer1.computerMakeGuess(runThroughs);
+		$("#numPlayerSelect").addClass('hidden');	
 	}
 };
+
+function player1Turn() {
+	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
+		var guess = $(this).attr('id');
+		$("#numPlayerSelect").addClass('hidden');
+		controllerPlayer1.processGuessPlayer1(guess);
+		$('#right').find('td').off('click', player1Turn);
+		$('#left').find('td').on('click', player2Turn);
+	}
+};
+
+function player2Turn() {
+	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
+		var guess = $(this).attr('id');
+		$("#numPlayerSelect").addClass('hidden');
+		controllerPlayer2.processGuessPlayer2(guess);
+		$('#right').find('td').on('click', player1Turn);
+		$('#left').find('td').off('click', player2Turn);
+	}
+}
 
 window.onload = function() {
 	view.player1CharacterSelectButton();
 	view.player2CharacterSelectButton();
 	singlePlayerGameButton();
 	twoPlayerGameButton();
-	newGameButton();
+	view.newGameButton();
 	model.generateShipLocationsPlayer1();
 	model.generateShipLocationsPlayer2();
 

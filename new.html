@@ -16,6 +16,18 @@
 				<li id="clear" class="menu">New Game</li>
 				<li id="player2CS" class="menu">Character Select</li>
 			</ul>
+			<div id="cpuSelect1">
+				<input type="radio" name="cpuSelect1" id="player" value="player"/>
+				<label for="player">Player</label>
+				<input type="radio" name="cpuSelect1" id="CPU" value="CPU" />
+				<label for="CPU">CPU</label>
+			</div>
+			<div id="cpuSelect2">
+				<input type="radio" name="cpuSelect2" id="player" value="player"/>
+				<label for="player">Player</label>
+				<input type="radio" name="cpuSelect2" id="CPU" value="CPU" />
+				<label for="CPU">CPU</label>
+			</div>
 		</div>
 		<table id="heroSelect" class="hidden" oncontextmenu="return false;">
 			<tr>
@@ -55,7 +67,7 @@
 		<div id="board">
 			<div id="messageAreaPlayer1"></div>
 			<div id="messageAreaPlayer2"></div>
-			<table id="left">
+			<table id="left" oncontextmenu="return false;">
 				<tr>
 					<td id="00"></td><td id="01"></td><td id="02"></td><td id="03"></td><td id="04"></td>
 				<tr>
@@ -79,7 +91,7 @@
 					<td id="70"></td><td id="71"></td><td id="72"></td><td id="73"></td><td id="74"></td>
 				</tr>
 			</table>
-			<table id="right">
+			<table id="right" oncontextmenu="return false;">
 				<tr>
 					<td id="05"></td><td id="06"></td><td id="07"></td><td id="08"></td><td id="09"></td>
 				<tr>
