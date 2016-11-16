@@ -1,5 +1,6 @@
 body {
 	background-color: black;
+	min-width: 900px;
 }
 ul,
 li {
@@ -23,26 +24,10 @@ li {
 	cursor: default;
 }
 .menu {
-	background-color: transparent;
-	border: none;
+	background-color: #323232;
+	border-color: #323232;
 	color: white;
-	font-size: 20px;
-	letter-spacing: 2px;
-	padding: 0 30px;
-}
-.menu:hover {
-	color: #ffff00;
-}
-#cpuSelect1,
-#cpuSelect2 {
-	display: inline-block;
-	margin: 0 50px;
-}
-#cpuSelect1 {
-	float: left;
-}
-#cpuSelect2 {
-	float: right;
+	font-size: 18px;
 }
 #heroSelect,
 #villianSelect {
@@ -160,9 +145,14 @@ li {
 	background-color: #00ff80;
 }
 .babidi {
-	background: no-repeat url(../images/babidi.png) 200% -1000%;
+	background: no-repeat url(../images/babidi.png);
 	background-size: 95%;
 	background-color: orange;
+}
+.fatBuu {
+	background: no-repeat url(../images/fatBuu.png) 0% 0%;
+	background-size: 120%;
+	background-color: #ff94ce;
 }
 .evilBuu {
 	background: no-repeat url(../images/evilBuu.png) 0% 25%;
@@ -332,10 +322,10 @@ li {
 .evilBuuBackground {
 	background-color: #bdbdbd;
 }
-.kidBuuMessageBoard, .superBuuMessageBoard {
+.kidBuuMessageBoard, .superBuuMessageBoard, .fatBuuMessageBoard {
 	color: #ff94ce;
 }
-.kidBuuBackground, .superBuuBackground {
+.kidBuuBackground, .superBuuBackground, .fatBuuBackground {
 	background-color: #ff94ce;
 }
 .cellMessageBoard {
@@ -443,6 +433,16 @@ td {
 }
 .shade {
 	background-color: black;
+}
+@media only screen and (min-width: 0px) {
+	#imgPlayer2 {
+		display: none;
+	}
+}
+@media only screen and (min-width: 900px) {
+	#imgPlayer2 {
+		display: block;
+	}
 }
 @media only screen and (min-width: 1024px) {
 	td {

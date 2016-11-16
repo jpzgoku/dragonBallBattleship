@@ -72,6 +72,7 @@ var view = {
 			displayVillian(".zamasu", 'zamasuMessageBoard', 'zamasuBackground', 'zamasu');
 			displayVillian(".frieza", 'freizaMessageBoard', 'freizaBackground', 'frieza');
 			displayVillian(".babidi", 'babidiMessageBoard', 'babidiBackground', 'babidi');
+			displayVillian(".fatBuu", 'fatBuuMessageBoard', 'fatBuuBackground', 'fatBuu');
 			displayVillian(".evilBuu", 'evilBuuMessageBoard', 'evilBuuBackground', 'evilBuu');
 			displayVillian(".superBuu", 'superBuuMessageBoard', 'superBuuBackground', 'superBuu');
 			displayVillian(".kidBuu", 'kidBuuMessageBoard', 'kidBuuBackground', 'kidBuu');
@@ -111,7 +112,7 @@ var view = {
 	},
 
 	newGameButton: function() {
-		$("#clear").click(function() {
+		$("#clear").on('click', function() {
 			$('#left').find('td').removeClass('hit miss');
 			$('#right').find('td').removeClass('hit miss');
 			view.displayMessagePlayer1("");
@@ -128,7 +129,6 @@ var view = {
 									{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
 			model.generateShipLocationsPlayer1();
 			model.generateShipLocationsPlayer2();
-			$("#numPlayerSelect").removeClass('hidden');
 		});
 	}
 };
@@ -298,6 +298,8 @@ function parseGuess(guess, conditional, message) {
 };
 
 var controllerPlayer1 = {
+
+	pilot: "human",
 	guesses: 0,
 
 	processGuessPlayer1: function(guess) {
@@ -394,6 +396,8 @@ var controllerPlayer1 = {
 };
 
 var controllerPlayer2 = {
+
+	pilot: "human",
 	guesses: 0,
 
 	processGuessPlayer2: function(guess) {
@@ -494,99 +498,119 @@ var vegeta = {
 
 	specialMoveUsage: 0,
 
-	bigBang: function() {
+	bigBang: function(playerController) {
 		$('#right').find('td').contextmenu(function() {
 
 			var guess = $(this).attr('id');
 			var row = guess.charAt(0);
 			var column = guess.charAt(1);
-			controllerPlayer1.processGuessPlayer1(guess);
-			controllerPlayer1.processGuessPlayer1(String(Number(row) + 1) + column);
-			controllerPlayer1.processGuessPlayer1(String(Number(row) - 1) + column);
-			controllerPlayer1.processGuessPlayer1(row + String(Number(column) + 1));
-			controllerPlayer1.processGuessPlayer1(row + String(Number(column) - 1));			
+			playerController.processGuessPlayer1(guess);
+			playerController.processGuessPlayer1(String(Number(row) + 1) + column);
+			playerController.processGuessPlayer1(String(Number(row) - 1) + column);
+			playerController.processGuessPlayer1(row + String(Number(column) + 1));
+			playerController.processGuessPlayer1(row + String(Number(column) - 1));			
 		});
 	}
 };
 
-function singlePlayerGameButton() {
-	$("#1Player").click(function() {
-		play1PlayerGame();
-		$("#newCharacterSelect").removeClass('hidden');
+function clickPlayer1() {
+	$("#clear").trigger('click');
+	$('#right').find('td').on('click', player1TurnHuman);
+	controllerPlayer1.pilot = "human";
+	$('#human1').off('click', clickPlayer1);
+};
+
+function player1CpuSelect() {
+	$('#human1').on('click', clickPlayer1)
+	$('#computer1').on('click', function() {
+		$("#clear").trigger('click');
+		$('#right').find('td').off('click', player1TurnHuman);
+		controllerPlayer1.pilot = "cpu";
+		$('#human1').on('click', clickPlayer1);
 	});
 };
 
-function twoPlayerGameButton() {
-	$("#2Player").click(function() {
-		play2PlayerGame();
-		$("#newCharacterSelect").removeClass('hidden');
+function clickPlayer2() {
+	$("#clear").trigger('click');
+	$('#left').find('td').on('click', player2TurnHuman);
+	controllerPlayer2.pilot = "human";
+	$('#human2').off('click', clickPlayer2);
+};
+
+function player2CpuSelect() {
+	$('#human2').on('click', clickPlayer2);
+	$('#computer2').on('click', function() {
+		$("#clear").trigger('click');
+		$('#left').find('td').off('click', player2TurnHuman);
+		controllerPlayer2.pilot = "cpu";
+		$('#human2').on('click', clickPlayer2);
 	});
 };
 
-function play1PlayerGame() {
-	$('#right').find('td').on('click', singlePlayerRules); // origional one 
-	/*$('#left').find('td').on('click', singlePlayerRules); // new one */
-	$('#right').find('td').off('click', player1Turn);
-	$('#left').find('td').off('click', player2Turn);
-	/*$('#right').find('td').on('contextmenu', vegeta.bigBang);*/
-};
-
-function play2PlayerGame() {
-	$('#right').find('td').off('click', singlePlayerRules);
-	$('#right').find('td').on('click', player1Turn);
-	$('#left').find('td').off('click', player2Turn);
-};
-
-function singlePlayerRules() { // original one
-	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
-		var runThroughs = 0;
-		var guess = $(this).attr('id');
-		controllerPlayer1.processGuessPlayer1(guess);
-		controllerPlayer2.computerMakeGuess(runThroughs);
-		$("#numPlayerSelect").addClass('hidden');	
-	}
-};
-
-/*function singlePlayerRules() { // new one
-	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
-		var runThroughs = 0;
-		var guess = $(this).attr('id');
-		controllerPlayer2.processGuessPlayer2(guess);
-		controllerPlayer1.computerMakeGuess(runThroughs);
-		$("#numPlayerSelect").addClass('hidden');	
-	}
-};*/
-
-function player1Turn() {
+function player1TurnHuman() {
 	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
 		var guess = $(this).attr('id');
-		$("#numPlayerSelect").addClass('hidden');
 		controllerPlayer1.processGuessPlayer1(guess);
-		$('#right').find('td').off('click', player1Turn);
-		$('#left').find('td').on('click', player2Turn);
+		$('#right').find('td').off('click', player1TurnHuman);
+		if (controllerPlayer2.pilot === "human") {
+			$('#left').find('td').on('click', player2TurnHuman);
+		} else if (controllerPlayer2.pilot === "cpu") {
+			player2TurnCPU();
+		}
 	}
 };
 
-function player2Turn() {
+function player2TurnHuman() {
 	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
 		var guess = $(this).attr('id');
-		$("#numPlayerSelect").addClass('hidden');
 		controllerPlayer2.processGuessPlayer2(guess);
-		$('#right').find('td').on('click', player1Turn);
-		$('#left').find('td').off('click', player2Turn);
+		$('#left').find('td').off('click', player2TurnHuman);
+		if (controllerPlayer1.pilot === "human") {
+			$('#right').find('td').on('click', player1TurnHuman);
+		} else if (controllerPlayer1.pilot === "cpu") {
+			player1TurnCPU();
+		}
 	}
-}
+};
+
+function player1TurnCPU() {
+	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
+		var runThroughs = 0;
+		setTimeout(function() {
+			controllerPlayer1.computerMakeGuess(runThroughs);
+		}, 500)
+		if (controllerPlayer2.pilot === "human") {
+			$('#left').find('td').on('click', player2TurnHuman);
+		} 
+	}
+};
+
+function player2TurnCPU() {
+	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
+		var runThroughs = 0;
+		setTimeout(function() {
+			controllerPlayer2.computerMakeGuess(runThroughs);
+		}, 500)
+		if (controllerPlayer1.pilot === "human") {
+			$('#right').find('td').on('click', player1TurnHuman);
+		}
+	}
+};
 
 window.onload = function() {
 	view.player1CharacterSelectButton();
 	view.player2CharacterSelectButton();
-	singlePlayerGameButton();
-	twoPlayerGameButton();
+	player1CpuSelect();
+	player2CpuSelect();
 	view.newGameButton();
 	model.generateShipLocationsPlayer1();
 	model.generateShipLocationsPlayer2();
 	$('#cpuSelect1').buttonset();
+	$('#player1CS').button();
+	$('#clear').button();
+	$('#player2CS').button();
 	$('#cpuSelect2').buttonset();
+
 
 	view.toggleCharacters("#hDiv2", ['gokuBlue', 'goku'], "#player1CS");
 	view.toggleCharacters("#hDiv4", ['trunks', 'trunksSS'], "#player1CS");
@@ -594,7 +618,7 @@ window.onload = function() {
 	view.toggleCharacters("#hDiv7", ['vegeta', 'superVegeta'], "#player1CS");
 	
 	view.toggleCharacters("#vDiv6", ['black', 'blackRose'], "#player2CS");
-	view.toggleCharacters("#vDiv8", ['kidBuu', 'evilBuu', 'superBuu'], "#player2CS");
+	view.toggleCharacters("#vDiv8", ['kidBuu', 'fatBuu', 'evilBuu', 'superBuu'], "#player2CS");
 	view.toggleCharacters("#vDiv10", ['imperfectCell', 'semiPerfectCell', 'cell'], "#player2CS");
 }
 
