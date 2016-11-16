@@ -35,7 +35,6 @@ li {
 }
 #cpuSelect1,
 #cpuSelect2 {
-	color: white;
 	display: inline-block;
 	margin: 0 50px;
 }
@@ -61,6 +60,11 @@ li {
 	border: none
 }
 .goku {
+	background: no-repeat url(../images/gokuEnergy.png);
+	background-size: cover;
+	background-color: #e50000;
+}
+.gokuBlue {
 	background: no-repeat url(../images/gokuBlue.png);
 	background-size: cover;
 	background-color: #00ffff;
@@ -91,8 +95,8 @@ li {
 	background-color: #885ead;
 }
 .piccolo {
-	background: no-repeat url(../images/piccolo.png);
-	background-size: cover;
+	background: no-repeat url(../images/piccolo2.png) 50% 0%;
+	background-size: 75%;
 	background-color:#00CE00;
 }
 .gohan {
@@ -240,10 +244,16 @@ li {
 #messageAreaPlayer2 {
 	float: right;
 }
-.gokuMessageBoard, .vegetaMessageBoard, .trunksMessageBoard {
+.gokuMessageBoard {
+	color: #e50000;
+}
+.gokuBackground {
+	background-color: #e50000;
+}
+.gokuBlueMessageBoard, .vegetaMessageBoard, .trunksMessageBoard {
 	color: #00ffff;
 }
-.gokuBackground, .vegetaBackground, .trunksBackground {
+.gokuBlueBackground, .vegetaBackground, .trunksBackground {
 	background-color: #00ffff;
 }
 .beerusMessageBoard {

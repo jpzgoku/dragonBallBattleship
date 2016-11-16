@@ -31,6 +31,7 @@ var view = {
 			$("#board").addClass('hidden');
 
 			displayHero(".goku", 'gokuMessageBoard', 'gokuBackground', 'goku');
+			displayHero(".gokuBlue", 'gokuBlueMessageBoard', 'gokuBlueBackground', 'gokuBlue');
 			displayHero(".vegeta", 'vegetaMessageBoard', 'vegetaBackground', 'vegeta');
 			displayHero(".superVegeta", 'superVegetaMessageBoard', 'superVegetaBackground', 'superVegeta');
 			displayHero(".beerus", 'beerusMessageBoard', 'beerusBackground', 'beerus');
@@ -523,8 +524,8 @@ function twoPlayerGameButton() {
 };
 
 function play1PlayerGame() {
-	/*$('#right').find('td').on('click', singlePlayerRules); // origional one */
-	$('#left').find('td').on('click', singlePlayerRules); // new one
+	$('#right').find('td').on('click', singlePlayerRules); // origional one 
+	/*$('#left').find('td').on('click', singlePlayerRules); // new one */
 	$('#right').find('td').off('click', player1Turn);
 	$('#left').find('td').off('click', player2Turn);
 	/*$('#right').find('td').on('contextmenu', vegeta.bigBang);*/
@@ -536,7 +537,7 @@ function play2PlayerGame() {
 	$('#left').find('td').off('click', player2Turn);
 };
 
-/*function singlePlayerRules() { // original one
+function singlePlayerRules() { // original one
 	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
 		var runThroughs = 0;
 		var guess = $(this).attr('id');
@@ -544,9 +545,9 @@ function play2PlayerGame() {
 		controllerPlayer2.computerMakeGuess(runThroughs);
 		$("#numPlayerSelect").addClass('hidden');	
 	}
-};*/
+};
 
-function singlePlayerRules() { // new one
+/*function singlePlayerRules() { // new one
 	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
 		var runThroughs = 0;
 		var guess = $(this).attr('id');
@@ -554,7 +555,7 @@ function singlePlayerRules() { // new one
 		controllerPlayer1.computerMakeGuess(runThroughs);
 		$("#numPlayerSelect").addClass('hidden');	
 	}
-};
+};*/
 
 function player1Turn() {
 	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
@@ -584,7 +585,10 @@ window.onload = function() {
 	view.newGameButton();
 	model.generateShipLocationsPlayer1();
 	model.generateShipLocationsPlayer2();
+	$('#cpuSelect1').buttonset();
+	$('#cpuSelect2').buttonset();
 
+	view.toggleCharacters("#hDiv2", ['gokuBlue', 'goku'], "#player1CS");
 	view.toggleCharacters("#hDiv4", ['trunks', 'trunksSS'], "#player1CS");
 	view.toggleCharacters("#hDiv5", ['gotenks', 'gotenksSS', 'gotenksSS3'], "#player1CS");
 	view.toggleCharacters("#hDiv7", ['vegeta', 'superVegeta'], "#player1CS");

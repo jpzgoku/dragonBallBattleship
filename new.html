@@ -3,6 +3,7 @@
 	<head>
 		<title>Dragon Ball Styles Test</title>
 		<meta charset="uft-8">
+		<link href="css/jquery-ui.css" rel="stylesheet" type="text/css">
 		<link href= "css/new.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
@@ -17,22 +18,18 @@
 				<li id="player2CS" class="menu">Character Select</li>
 			</ul>
 			<div id="cpuSelect1">
-				<input type="radio" name="cpuSelect1" id="player" value="player"/>
-				<label for="player">Player</label>
-				<input type="radio" name="cpuSelect1" id="CPU" value="CPU" />
-				<label for="CPU">CPU</label>
+				<button id="human1">Player</button>
+				<button id="computer1">CPU</button>
 			</div>
 			<div id="cpuSelect2">
-				<input type="radio" name="cpuSelect2" id="player" value="player"/>
-				<label for="player">Player</label>
-				<input type="radio" name="cpuSelect2" id="CPU" value="CPU" />
-				<label for="CPU">CPU</label>
+				<button id="human2">Player</button>
+				<button id="computer2">CPU</button>
 			</div>
 		</div>
 		<table id="heroSelect" class="hidden" oncontextmenu="return false;">
 			<tr>
 				<td id="hDiv1" class="tien"></td>
-				<td id="hDiv2" class="goku"></td>
+				<td id="hDiv2" class="gokuBlue"></td>
 				<td id="hDiv3" class="piccolo"></td>
 				<td id="hDiv4" class="trunks"></td>
 			</tr>
@@ -120,6 +117,7 @@
 			<div id="imgPlayer2"></div>
 		</div>
 		<script src="js/jquery-3.1.0.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
 		<script src="js/new.js"></script>
 	</body>
 </html>
