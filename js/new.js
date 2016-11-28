@@ -70,7 +70,9 @@ var view = {
 			displayVillian(".black", 'blackMessageBoard', 'blackBackground', 'black');
 			displayVillian(".blackRose", 'blackRoseMessageBoard', 'blackRoseBackground', 'blackRose');
 			displayVillian(".zamasu", 'zamasuMessageBoard', 'zamasuBackground', 'zamasu');
-			displayVillian(".frieza", 'freizaMessageBoard', 'freizaBackground', 'frieza');
+			displayVillian(".frieza", 'friezaMessageBoard', 'friezaBackground', 'frieza');
+			displayVillian(".goldenFrieza", 'goldenFriezaMessageBoard', 'goldenFriezaBackground', 'goldenFrieza');
+			displayVillian(".friezaFirstForm", 'friezaFirstFormMessageBoard', 'friezaFirstFormBackground', 'friezaFirstForm');
 			displayVillian(".babidi", 'babidiMessageBoard', 'babidiBackground', 'babidi');
 			displayVillian(".fatBuu", 'fatBuuMessageBoard', 'fatBuuBackground', 'fatBuu');
 			displayVillian(".evilBuu", 'evilBuuMessageBoard', 'evilBuuBackground', 'evilBuu');
@@ -81,6 +83,8 @@ var view = {
 			displayVillian(".imperfectCell", 'imperfectCellMessageBoard', 'imperfectCellBackground', 'imperfectCell');
 			displayVillian(".cellJr", 'cellJrMessageBoard', 'cellJrBackground', 'cellJr');
 			displayVillian(".frost", 'frostMessageBoard', 'frostBackground', 'frost');
+			displayVillian(".frost3rdForm", 'frost3rdFormMessageBoard', 'frost3rdFormBackground', 'frost3rdForm');
+			displayVillian(".frostFinalForm", 'frostFinalFormMessageBoard', 'frostFinalFormBackground', 'frostFinalForm');
 			displayVillian(".android17",'android17MessageBoard', 'android17Background', 'android17');
 			displayVillian(".android18",'android18MessageBoard', 'android18Background', 'android18');
 			displayVillian(".android19",'android19MessageBoard', 'android19Background', 'android19');
@@ -129,6 +133,8 @@ var view = {
 									{ locations: [0, 0, 0], hits: ["", "", ""], sunk: false }];
 			model.generateShipLocationsPlayer1();
 			model.generateShipLocationsPlayer2();
+			/*$('#right').find('td').on('contextmenu', player1specialMove);
+			$('#left').find('td').on('contextmenu', player2specialMove);*/
 		});
 	}
 };
@@ -286,14 +292,26 @@ var model = {
 	}
 };
 
-function parseGuess(guess, conditional, message) {
+
+function parseGuessPlayer1(guess) {
 	var row = guess.charAt(0);
 	var column = guess.charAt(1);
-	if (conditional) {
+	if (column > 4) {
 		return row + column;
-	} else {
-		message("Don't attack yourself!");
-	}
+	} /*else {
+		view.displayMessagePlayer1("Don't attack yourself!");
+	}*/
+	return null;
+};
+
+function parseGuessPlayer2(guess) {
+	var row = guess.charAt(0);
+	var column = guess.charAt(1);
+	if (column < 5) {
+		return row + column;
+	} /*else {
+		view.displayMessagePlayer2("Don't attack yourself!");
+	}*/
 	return null;
 };
 
@@ -303,7 +321,7 @@ var controllerPlayer1 = {
 	guesses: 0,
 
 	processGuessPlayer1: function(guess) {
-		var location = parseGuess(guess, "column > 4", view.displayMessagePlayer1);
+		var location = parseGuessPlayer1(guess);
 		if (location) {
 			if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
 				this.guesses++;
@@ -401,7 +419,7 @@ var controllerPlayer2 = {
 	guesses: 0,
 
 	processGuessPlayer2: function(guess) {
-		var location = parseGuess(guess, 'column < 5', view.displayMessagePlayer2);
+		var location = parseGuessPlayer2(guess);
 		if (location) {
 			if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
 				this.guesses++;
@@ -469,7 +487,6 @@ var controllerPlayer2 = {
 			runThroughs++;
 			var firstDigit = String(guess).charAt(0);
 			var secondDigit = String(guess).charAt(1);
-			/*if (guess > (String(model.boardSizeRow - 1) + String(model.boardSizeCol - 1)) || guess.length !== 2 || Number(secondDigit) === model.boardSizeCol) {*/
 			if (firstDigit < 0 || firstDigit > model.boardSizeRow - 1 ||
 				secondDigit >= model.boardSizeCol || guess.length !== 2) {
 				return educatedGuess();
@@ -493,58 +510,158 @@ var controllerPlayer2 = {
 		this.processGuessPlayer2(guess);
 	}
 };
-
+/*
 var vegeta = {
 
 	specialMoveUsage: 0,
 
-	bigBang: function(playerController) {
-		$('#right').find('td').contextmenu(function() {
-
-			var guess = $(this).attr('id');
-			var row = guess.charAt(0);
-			var column = guess.charAt(1);
-			playerController.processGuessPlayer1(guess);
-			playerController.processGuessPlayer1(String(Number(row) + 1) + column);
-			playerController.processGuessPlayer1(String(Number(row) - 1) + column);
-			playerController.processGuessPlayer1(row + String(Number(column) + 1));
-			playerController.processGuessPlayer1(row + String(Number(column) - 1));			
-		});
+	bigBang: function(guess) {
+		console.log(guess);
+		var row = guess.charAt(0);
+		var column = guess.charAt(1);
+		controllerPlayer1.processGuessPlayer1(guess);
+		controllerPlayer1.processGuessPlayer1(String(Number(row) + 1) + column);
+		controllerPlayer1.processGuessPlayer1(String(Number(row) - 1) + column);
+		controllerPlayer1.processGuessPlayer1(row + String(Number(column) + 1));
+		controllerPlayer1.processGuessPlayer1(row + String(Number(column) - 1));
+		view.displayMessagePlayer1("Big Bang Attack!");
 	}
+};
+
+var piccolo = {
+
+	specialMoveUsage: 0,
+
+	lightGrenade: function(guess) {
+		console.log(guess);
+		var row = guess.charAt(0);
+		var column = guess.charAt(1);
+		controllerPlayer1.processGuessPlayer1(guess);
+		controllerPlayer1.processGuessPlayer1(row + String(Number(column) + 1));
+		controllerPlayer1.processGuessPlayer1(row + String(Number(column) - 1));
+		controllerPlayer1.processGuessPlayer1(String(Number(row) - 1) + column);
+		view.displayMessagePlayer1("Light Grenade!");
+	}
+}
+
+var trunks = {
+
+	specialMoveUsage: 0,
+
+	swordSlash: function(guess) {
+		console.log(guess);
+		var row = guess.charAt(0);
+		var column = guess.charAt(1);
+		controllerPlayer1.processGuessPlayer1(guess);
+		controllerPlayer1.processGuessPlayer1(String(Number(row) + 1) + (Number(column) - 1));
+		controllerPlayer1.processGuessPlayer1(String(Number(row) + 2) + (Number(column) - 2));
+		view.displayMessagePlayer1("Sword Slash!");
+	}
+};
+
+var blackRose = {
+
+	specialMoveUsage: 0,
+
+	scytheSlash: function(guess) {
+		console.log(guess);
+		var row = guess.charAt(0);
+		var column = guess.charAt(1);
+		controllerPlayer2.processGuessPlayer2(guess);
+		controllerPlayer2.processGuessPlayer2(row + String(Number(column) + 1));
+		controllerPlayer2.processGuessPlayer2(row + String(Number(column) + 2));
+		controllerPlayer2.processGuessPlayer2(row + String(Number(column) + 3));
+		view.displayMessagePlayer2("Scythe Slash!");
+	}
+}
+
+var zamasu = {
+
+	specialMoveUsage: 0,
+
+	karateChop: function(guess) {
+		console.log(guess);
+		var row = guess.charAt(0);
+		var column = guess.charAt(1);
+		controllerPlayer2.processGuessPlayer2(guess);
+		controllerPlayer2.processGuessPlayer2(String(Number(row) + 1) + column);
+		controllerPlayer2.processGuessPlayer2(String(Number(row) + 2) + column);
+	}
+};
+
+function player1specialMove() {
+	var guess = $(this).attr('id');
+	var imgId = $('#imgPlayer1').attr('class');
+	if (imgId === "vegeta") {
+		vegeta.bigBang(guess);
+	} else if (imgId === "piccolo") {
+		piccolo.lightGrenade(guess);
+	} else if (imgId === "trunks") {
+		trunks.swordSlash(guess);
+	}
+	$('#right').find('td').off('contextmenu', player1specialMove);
+	$('#right').find('td').off('click', player1TurnHuman);
+	if (controllerPlayer2.pilot === "human") {
+		$('#left').find('td').on('click', player2TurnHuman);
+	} else if (controllerPlayer2.pilot === "cpu") {
+		player2TurnCPU();
+	}
+};
+
+function player2specialMove() {
+	var guess = $(this).attr('id');
+	var imgId = $('#imgPlayer2').attr('class');
+	if (imgId === "zamasu") {
+		zamasu.karateChop(guess);
+	} else if (imgId === "blackRose") {
+		blackRose.scytheSlash(guess);
+	}
+	$('#left').find('td').off('contextmenu', player2specialMove);
+	$('#left').find('td').off('click', player2TurnHuman);
+	if (controllerPlayer1.pilot === "human") {
+		$('#right').find('td').on('click', player1TurnHuman);
+	} else if (controllerPlayer1.pilot === "cpu") {
+		player1TurnCPU();
+	}
+};*/
+
+function playerCPUSelect() {
+	$('#human1').on('click', clickPlayer1);
+	$('#computer1').on('click', function() {
+		if (controllerPlayer1.pilot === "human") {
+			$("#clear").trigger('click');
+			$('#right').find('td').off('click', player1TurnHuman);
+			controllerPlayer1.pilot = "cpu";
+			$('#human1').on('click', clickPlayer1);
+			//$('#human2').on('click', clickPlayer2); //add this to fix the getting stuck problem, but it adds a multiple guess problem
+		}
+	});
+	$('#human2').on('click', clickPlayer2);
+	$('#computer2').on('click', function() {
+		if (controllerPlayer2.pilot === "human") {
+			$("#clear").trigger('click');
+			$('#left').find('td').off('click', player2TurnHuman);
+			controllerPlayer2.pilot = "cpu";
+			$('#human2').on('click', clickPlayer2);
+			//$('#human1').on('click', clickPlayer1); //add this to fix the getting stuck problem, but it adds a multiple guess problem
+		}
+	});
 };
 
 function clickPlayer1() {
 	$("#clear").trigger('click');
 	$('#right').find('td').on('click', player1TurnHuman);
+	//$('#right').find('td').on('contextmenu', player1specialMove);
 	controllerPlayer1.pilot = "human";
 	$('#human1').off('click', clickPlayer1);
-};
-
-function player1CpuSelect() {
-	$('#human1').on('click', clickPlayer1)
-	$('#computer1').on('click', function() {
-		$("#clear").trigger('click');
-		$('#right').find('td').off('click', player1TurnHuman);
-		controllerPlayer1.pilot = "cpu";
-		$('#human1').on('click', clickPlayer1);
-	});
 };
 
 function clickPlayer2() {
 	$("#clear").trigger('click');
 	$('#left').find('td').on('click', player2TurnHuman);
+	//$('#left').find('td').on('contextmenu', player2specialMove);
 	controllerPlayer2.pilot = "human";
 	$('#human2').off('click', clickPlayer2);
-};
-
-function player2CpuSelect() {
-	$('#human2').on('click', clickPlayer2);
-	$('#computer2').on('click', function() {
-		$("#clear").trigger('click');
-		$('#left').find('td').off('click', player2TurnHuman);
-		controllerPlayer2.pilot = "cpu";
-		$('#human2').on('click', clickPlayer2);
-	});
 };
 
 function player1TurnHuman() {
@@ -574,43 +691,40 @@ function player2TurnHuman() {
 };
 
 function player1TurnCPU() {
-	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
-		var runThroughs = 0;
-		setTimeout(function() {
-			controllerPlayer1.computerMakeGuess(runThroughs);
-		}, 500)
-		if (controllerPlayer2.pilot === "human") {
-			$('#left').find('td').on('click', player2TurnHuman);
-		} 
-	}
+	var runThroughs = 0;
+	setTimeout(function() {
+		controllerPlayer1.computerMakeGuess(runThroughs);
+	}, 500)
+	if (controllerPlayer2.pilot === "human") {
+		$('#left').find('td').on('click', player2TurnHuman);
+	} 
 };
 
 function player2TurnCPU() {
-	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
-		var runThroughs = 0;
-		setTimeout(function() {
-			controllerPlayer2.computerMakeGuess(runThroughs);
-		}, 500)
-		if (controllerPlayer1.pilot === "human") {
-			$('#right').find('td').on('click', player1TurnHuman);
-		}
+	var runThroughs = 0;
+	setTimeout(function() {
+		controllerPlayer2.computerMakeGuess(runThroughs);
+	}, 500)
+	if (controllerPlayer1.pilot === "human") {
+		$('#right').find('td').on('click', player1TurnHuman);
 	}
 };
 
 window.onload = function() {
 	view.player1CharacterSelectButton();
 	view.player2CharacterSelectButton();
-	player1CpuSelect();
-	player2CpuSelect();
+	playerCPUSelect();
 	view.newGameButton();
 	model.generateShipLocationsPlayer1();
 	model.generateShipLocationsPlayer2();
+
 	$('#cpuSelect1').buttonset();
 	$('#player1CS').button();
 	$('#clear').button();
 	$('#player2CS').button();
 	$('#cpuSelect2').buttonset();
-
+	/*$('#specialMove1').button();
+	$('#specialMove2').button();*/
 
 	view.toggleCharacters("#hDiv2", ['gokuBlue', 'goku'], "#player1CS");
 	view.toggleCharacters("#hDiv4", ['trunks', 'trunksSS'], "#player1CS");
@@ -619,7 +733,9 @@ window.onload = function() {
 	
 	view.toggleCharacters("#vDiv6", ['black', 'blackRose'], "#player2CS");
 	view.toggleCharacters("#vDiv8", ['kidBuu', 'fatBuu', 'evilBuu', 'superBuu'], "#player2CS");
+	view.toggleCharacters("#vDiv9", ['frost', 'frost3rdForm', 'frostFinalForm'], "#player2CS");
 	view.toggleCharacters("#vDiv10", ['imperfectCell', 'semiPerfectCell', 'cell'], "#player2CS");
+	view.toggleCharacters("#vDiv11", ['frieza', 'goldenFrieza', 'friezaFirstForm'], "#player2CS");
 }
 
 
