@@ -625,63 +625,90 @@ function player2specialMove() {
 	}
 };*/
 
-function playerCPUSelect() {
-	$('#human1').on('click', clickPlayer1);
-	$('#computer1').on('click', function() {
-		if (controllerPlayer1.pilot === "human") {
-			$("#clear").trigger('click');
+var controller = {
+
+	playerCPUSelect: function() {
+		$('#human1').on('click', function() {
+			controllerPlayer1.pilot = "human";
 			$('#right').find('td').off('click', player1TurnHuman);
-			controllerPlayer1.pilot = "cpu";
-			$('#human1').on('click', clickPlayer1);
-			//$('#human2').on('click', clickPlayer2); //add this to fix the getting stuck problem, but it adds a multiple guess problem
-		}
-	});
-	$('#human2').on('click', clickPlayer2);
-	$('#computer2').on('click', function() {
-		if (controllerPlayer2.pilot === "human") {
-			$("#clear").trigger('click');
 			$('#left').find('td').off('click', player2TurnHuman);
+			clear();
+		});
+		$('#computer1').on('click', function() {
+			controllerPlayer1.pilot = "cpu";
+			$('#right').find('td').off('click', player1TurnHuman);
+			$('#left').find('td').off('click', player2TurnHuman);
+			clear();
+		});
+		$('#human2').on('click', function() {
+			controllerPlayer2.pilot = "human";
+			$('#right').find('td').off('click', player1TurnHuman);
+			$('#left').find('td').off('click', player2TurnHuman);
+			clear();
+		});
+		$('#computer2').on('click', function() {
 			controllerPlayer2.pilot = "cpu";
-			$('#human2').on('click', clickPlayer2);
-			//$('#human1').on('click', clickPlayer1); //add this to fix the getting stuck problem, but it adds a multiple guess problem
+			$('#right').find('td').off('click', player1TurnHuman);
+			$('#left').find('td').off('click', player2TurnHuman);
+			clear();
+		});
+
+		function clear() {
+			$('#start').removeClass('hidden');
+			$('#clear').addClass('hidden');
+			$("#clear").trigger('click');
+		};
+	},
+
+	pressStartGameButton: function() {
+		$('#start').on('click', controller.startGame);
+	},
+
+	startGame: function() {
+		if (controllerPlayer1.pilot === "human" && controllerPlayer2.pilot === "human") {
+			$('#right').find('td').on('click', player1TurnHuman);
+			//$('#right').find('td').on('contextmenu', player1specialMove);
+			$('#left').find('td').on('click', player2TurnHuman);
+			//$('#left').find('td').on('contextmenu', player2specialMove);
+			$('#start').addClass('hidden');
+			$('#clear').removeClass('hidden');
+		} else if (controllerPlayer1.pilot === "human" && controllerPlayer2.pilot === "cpu") {
+			$('#right').find('td').on('click', player1TurnHuman);
+			//$('#right').find('td').on('contextmenu', player1specialMove);
+			$('#left').find('td').off('click', player2TurnHuman);
+			//$('#left').find('td').off('contextmenu', player2specialMove);
+			$('#start').addClass('hidden');
+			$('#clear').removeClass('hidden');
+		} else if (controllerPlayer1.pilot === "cpu" && controllerPlayer2.pilot === "human") {
+			$('#right').find('td').off('click', player1TurnHuman);
+			//$('#right').find('td').off('contextmenu', player1specialMove);
+			$('#left').find('td').on('click', player2TurnHuman);
+			//$('#left').find('td').on('contextmenu', player2specialMove);
+			$('#start').addClass('hidden');
+			$('#clear').removeClass('hidden');
 		}
-	});
-};
-
-function clickPlayer1() {
-	$("#clear").trigger('click');
-	$('#right').find('td').on('click', player1TurnHuman);
-	//$('#right').find('td').on('contextmenu', player1specialMove);
-	controllerPlayer1.pilot = "human";
-	$('#human1').off('click', clickPlayer1);
-};
-
-function clickPlayer2() {
-	$("#clear").trigger('click');
-	$('#left').find('td').on('click', player2TurnHuman);
-	//$('#left').find('td').on('contextmenu', player2specialMove);
-	controllerPlayer2.pilot = "human";
-	$('#human2').off('click', clickPlayer2);
+	}
 };
 
 function player1TurnHuman() {
 	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
+		$('#right').find('td').off('click', player1TurnHuman);
 		var guess = $(this).attr('id');
 		controllerPlayer1.processGuessPlayer1(guess);
-		$('#right').find('td').off('click', player1TurnHuman);
 		if (controllerPlayer2.pilot === "human") {
 			$('#left').find('td').on('click', player2TurnHuman);
 		} else if (controllerPlayer2.pilot === "cpu") {
 			player2TurnCPU();
 		}
+		
 	}
 };
 
 function player2TurnHuman() {
 	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
+		$('#left').find('td').off('click', player2TurnHuman);
 		var guess = $(this).attr('id');
 		controllerPlayer2.processGuessPlayer2(guess);
-		$('#left').find('td').off('click', player2TurnHuman);
 		if (controllerPlayer1.pilot === "human") {
 			$('#right').find('td').on('click', player1TurnHuman);
 		} else if (controllerPlayer1.pilot === "cpu") {
@@ -713,7 +740,8 @@ function player2TurnCPU() {
 window.onload = function() {
 	view.player1CharacterSelectButton();
 	view.player2CharacterSelectButton();
-	playerCPUSelect();
+	controller.playerCPUSelect();
+	controller.pressStartGameButton();
 	view.newGameButton();
 	model.generateShipLocationsPlayer1();
 	model.generateShipLocationsPlayer2();
@@ -721,6 +749,7 @@ window.onload = function() {
 	$('#cpuSelect1').buttonset();
 	$('#player1CS').button();
 	$('#clear').button();
+	$('#start').button();
 	$('#player2CS').button();
 	$('#cpuSelect2').buttonset();
 	/*$('#specialMove1').button();
