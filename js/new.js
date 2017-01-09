@@ -1,6 +1,6 @@
 var view = {
 	displayMessagePlayer1: function(msg) {
-		$("#messageAreaPlayer1").html(msg);
+		$('#messageAreaPlayer1').html(msg);
 	},
 	displayHitPlayer1: function(location) {
 		var cell = document.getElementById(location);
@@ -11,7 +11,7 @@ var view = {
 		$(cell).addClass('miss');
 	},
 	displayMessagePlayer2: function(msg) {
-		$("#messageAreaPlayer2").html(msg);
+		$('#messageAreaPlayer2').html(msg);
 	},
 	displayHitPlayer2: function(location) {
 		var cell = document.getElementById(location);
@@ -23,84 +23,90 @@ var view = {
 	},
 
 	player1CharacterSelectButton: function() {
-		$("#player1CS").on('click', function() {
-			$("#heroSelect").removeClass('hidden');
-			$('#messageAreaPlayer1').removeClass();
-			$('#left').removeClass();
-			$("#imgPlayer1").removeClass();
-			$("#board").addClass('hidden');
+		$('#player1CS').on('click', this.player1ChooseCharacter);
+	},
 
-			displayHero(".goku", 'gokuMessageBoard', 'gokuBackground', 'goku');
-			displayHero(".gokuBlue", 'gokuBlueMessageBoard', 'gokuBlueBackground', 'gokuBlue');
-			displayHero(".vegeta", 'vegetaMessageBoard', 'vegetaBackground', 'vegeta');
-			displayHero(".superVegeta", 'superVegetaMessageBoard', 'superVegetaBackground', 'superVegeta');
-			displayHero(".beerus", 'beerusMessageBoard', 'beerusBackground', 'beerus');
-			displayHero(".trunks", 'trunksMessageBoard', 'trunksBackground', 'trunks');
-			displayHero(".trunksSS", 'trunksSSMessageBoard', 'trunksSSBackground', 'trunksSS');
-			displayHero(".gohan", 'gohanMessageBoard', 'gohanBackground', 'gohan');			
-			displayHero(".piccolo", 'piccoloMessageBoard', 'piccoloBackground', 'piccolo');
-			displayHero(".tien", 'tienMessageBoard', 'tienBackground', 'tien');
-			displayHero(".gotenks", 'gotenksMessageBoard', 'gotenksBackground', 'gotenks');
-			displayHero(".gotenksSS", 'gotenksSSMessageBoard', 'gotenksSSBackground', 'gotenksSS');
-			displayHero(".gotenksSS3", 'gotenksSS3MessageBoard', 'gotenksSS3Background', 'gotenksSS3');
-		});
+	player1ChooseCharacter: function() {
+		controller.clear();
+		$('#player2CS').off('click', this.player2ChooseCharacter);
+		$('#heroSelect').removeClass('hidden');
+		$('#messageAreaPlayer1').removeClass();
+		$('#left').removeClass();
+		$('#imgPlayer1').removeClass();
+		$('#board').addClass('hidden');
 
+		displayHero('.goku', 'gokuMessageBoard', 'gokuBackground', 'goku');
+		displayHero('.gokuBlue', 'gokuBlueMessageBoard', 'gokuBlueBackground', 'gokuBlue');
+		displayHero('.vegeta', 'vegetaMessageBoard', 'vegetaBackground', 'vegeta');
+		displayHero('.superVegeta', 'superVegetaMessageBoard', 'superVegetaBackground', 'superVegeta');
+		displayHero('.beerus', 'beerusMessageBoard', 'beerusBackground', 'beerus');
+		displayHero('.trunks', 'trunksMessageBoard', 'trunksBackground', 'trunks');
+		displayHero('.trunksSS', 'trunksSSMessageBoard', 'trunksSSBackground', 'trunksSS');
+		displayHero('.gohan', 'gohanMessageBoard', 'gohanBackground', 'gohan');			
+		displayHero('.piccolo', 'piccoloMessageBoard', 'piccoloBackground', 'piccolo');
+		displayHero('.tien', 'tienMessageBoard', 'tienBackground', 'tien');
+		displayHero('.gotenks', 'gotenksMessageBoard', 'gotenksBackground', 'gotenks');
+		displayHero('.gotenksSS', 'gotenksSSMessageBoard', 'gotenksSSBackground', 'gotenksSS');
+		displayHero('.gotenksSS3', 'gotenksSS3MessageBoard', 'gotenksSS3Background', 'gotenksSS3');
+		
 		function displayHero(character, characterMessageBoard, characterBackground, characterPic) {
 			$(character).click(function() {
-				$('#messageAreaPlayer1').removeClass();
-				$('#messageAreaPlayer1').addClass(characterMessageBoard);
-				$('#left').removeClass();
-				$('#left').addClass(characterBackground);
-				$('#imgPlayer1').removeClass();
-				$('#imgPlayer1').addClass(characterPic);
-				$("#heroSelect").addClass('hidden');
-				$("#board").removeClass('hidden');
+				$('#messageAreaPlayer1').removeClass().addClass(characterMessageBoard);
+				$('#left').removeClass().addClass(characterBackground).addClass('ready');
+				$('#imgPlayer1').removeClass().addClass(characterPic);
+				$('#heroSelect').addClass('hidden');
+				$('#board').removeClass('hidden');
+				$('#player2CS').on('click', view.player2ChooseCharacter);
+				controller.startCheck();
 			});
 		};
 	},
 
 	player2CharacterSelectButton: function() {
-		$("#player2CS").on('click', function() {
-			$("#villianSelect").removeClass('hidden');
-			$('#messageAreaPlayer2').removeClass();
-			$('#right').removeClass();
-			$("#imgPlayer2").removeClass();
-			$("#board").addClass('hidden');
+		$('#player2CS').on('click', this.player2ChooseCharacter);
+	},
 
-			displayVillian(".black", 'blackMessageBoard', 'blackBackground', 'black');
-			displayVillian(".blackRose", 'blackRoseMessageBoard', 'blackRoseBackground', 'blackRose');
-			displayVillian(".zamasu", 'zamasuMessageBoard', 'zamasuBackground', 'zamasu');
-			displayVillian(".frieza", 'friezaMessageBoard', 'friezaBackground', 'frieza');
-			displayVillian(".goldenFrieza", 'goldenFriezaMessageBoard', 'goldenFriezaBackground', 'goldenFrieza');
-			displayVillian(".friezaFirstForm", 'friezaFirstFormMessageBoard', 'friezaFirstFormBackground', 'friezaFirstForm');
-			displayVillian(".babidi", 'babidiMessageBoard', 'babidiBackground', 'babidi');
-			displayVillian(".fatBuu", 'fatBuuMessageBoard', 'fatBuuBackground', 'fatBuu');
-			displayVillian(".evilBuu", 'evilBuuMessageBoard', 'evilBuuBackground', 'evilBuu');
-			displayVillian(".superBuu", 'superBuuMessageBoard', 'superBuuBackground', 'superBuu');
-			displayVillian(".kidBuu", 'kidBuuMessageBoard', 'kidBuuBackground', 'kidBuu');
-			displayVillian(".cell", 'cellMessageBoard', 'cellBackground', 'cell');
-			displayVillian(".semiPerfectCell", 'semiPerfectCellMessageBoard', 'semiPerfectCellBackground', 'semiPerfectCell');
-			displayVillian(".imperfectCell", 'imperfectCellMessageBoard', 'imperfectCellBackground', 'imperfectCell');
-			displayVillian(".cellJr", 'cellJrMessageBoard', 'cellJrBackground', 'cellJr');
-			displayVillian(".frost", 'frostMessageBoard', 'frostBackground', 'frost');
-			displayVillian(".frost3rdForm", 'frost3rdFormMessageBoard', 'frost3rdFormBackground', 'frost3rdForm');
-			displayVillian(".frostFinalForm", 'frostFinalFormMessageBoard', 'frostFinalFormBackground', 'frostFinalForm');
-			displayVillian(".android17",'android17MessageBoard', 'android17Background', 'android17');
-			displayVillian(".android18",'android18MessageBoard', 'android18Background', 'android18');
-			displayVillian(".android19",'android19MessageBoard', 'android19Background', 'android19');
-			displayVillian(".android20",'android20MessageBoard', 'android20Background', 'android20');
-		});
+	player2ChooseCharacter: function() {
+		controller.clear();
+		$('#player1CS').off('click', this.player1ChooseCharacter);
+		$('#villianSelect').removeClass('hidden');
+		$('#messageAreaPlayer2').removeClass();
+		$('#right').removeClass();
+		$('#imgPlayer2').removeClass();
+		$('#board').addClass('hidden');
+
+		displayVillian('.black', 'blackMessageBoard', 'blackBackground', 'black');
+		displayVillian('.blackRose', 'blackRoseMessageBoard', 'blackRoseBackground', 'blackRose');
+		displayVillian('.zamasu', 'zamasuMessageBoard', 'zamasuBackground', 'zamasu');
+		displayVillian('.frieza', 'friezaMessageBoard', 'friezaBackground', 'frieza');
+		displayVillian('.goldenFrieza', 'goldenFriezaMessageBoard', 'goldenFriezaBackground', 'goldenFrieza');
+		displayVillian('.friezaFirstForm', 'friezaFirstFormMessageBoard', 'friezaFirstFormBackground', 'friezaFirstForm');
+		displayVillian('.babidi', 'babidiMessageBoard', 'babidiBackground', 'babidi');
+		displayVillian('.fatBuu', 'fatBuuMessageBoard', 'fatBuuBackground', 'fatBuu');
+		displayVillian('.evilBuu', 'evilBuuMessageBoard', 'evilBuuBackground', 'evilBuu');
+		displayVillian('.superBuu', 'superBuuMessageBoard', 'superBuuBackground', 'superBuu');
+		displayVillian('.kidBuu', 'kidBuuMessageBoard', 'kidBuuBackground', 'kidBuu');
+		displayVillian('.cell', 'cellMessageBoard', 'cellBackground', 'cell');
+		displayVillian('.semiPerfectCell', 'semiPerfectCellMessageBoard', 'semiPerfectCellBackground', 'semiPerfectCell');
+		displayVillian('.imperfectCell', 'imperfectCellMessageBoard', 'imperfectCellBackground', 'imperfectCell');
+		displayVillian('.cellJr', 'cellJrMessageBoard', 'cellJrBackground', 'cellJr');
+		displayVillian('.frost', 'frostMessageBoard', 'frostBackground', 'frost');
+		displayVillian('.frost3rdForm', 'frost3rdFormMessageBoard', 'frost3rdFormBackground', 'frost3rdForm');
+		displayVillian('.frostFinalForm', 'frostFinalFormMessageBoard', 'frostFinalFormBackground', 'frostFinalForm');
+		displayVillian('.android17','android17MessageBoard', 'android17Background', 'android17');
+		displayVillian('.android18','android18MessageBoard', 'android18Background', 'android18');
+		displayVillian('.android19','android19MessageBoard', 'android19Background', 'android19');
+		displayVillian('.android20','android20MessageBoard', 'android20Background', 'android20');
 
 		function displayVillian(character, characterMessageBoard, characterBackground, characterPic) {
 			$(character).click(function() {
-				$('#messageAreaPlayer2').removeClass();
-				$('#messageAreaPlayer2').addClass(characterMessageBoard);
-				$('#right').removeClass();
-				$('#right').addClass(characterBackground);
-				$('#imgPlayer2').removeClass();
-				$('#imgPlayer2').addClass(characterPic);
-				$("#villianSelect").addClass('hidden');
-				$("#board").removeClass('hidden');
+				$('#messageAreaPlayer2').removeClass().addClass(characterMessageBoard);
+				$('#right').removeClass().addClass(characterBackground).addClass('ready');
+				$('#imgPlayer2').removeClass().addClass(characterPic);
+				$('#villianSelect').addClass('hidden');
+				$('#board').removeClass('hidden');
+				$('#player1CS').on('click', view.player1ChooseCharacter);
+				controller.startCheck();
 			});
 		};
 	}, 
@@ -116,7 +122,7 @@ var view = {
 	},
 
 	newGameButton: function() {
-		$("#clear").on('click', function() {
+		$('#clear').on('click', function() {
 			$('#left').find('td').removeClass('hit miss');
 			$('#right').find('td').removeClass('hit miss');
 			view.displayMessagePlayer1("");
@@ -158,19 +164,22 @@ var model = {
 			var ship = this.shipsPlayer1[i];
 			var index = ship.locations.indexOf(guess);
 			if (index >= 0) {
-				ship.hits[index] = "hit";
+				ship.hits[index] = 'hit';
 				view.displayHitPlayer1(guess);
-				view.displayMessagePlayer1("HIT!");
+				view.displayMessagePlayer1('HIT!');
 				if (this.isSunk(ship)) {
-					view.displayMessagePlayer1("You completed the combo!");
+					view.displayMessagePlayer1('You completed the combo!');
 					this.shipsPlayer1[i].sunk = true;
 				}
 				return true;
 			}
 		}
 		view.displayMissPlayer1(guess);
-		(this.allShipsSunk(this.shipsPlayer1.length, this.shipsPlayer1)) ? view.displayMessagePlayer1("You win! You landed all 3 combos in " + controllerPlayer1.guesses + " attemps!") :
-									   view.displayMessagePlayer1("You missed.");
+		if (this.allShipsSunk(this.shipsPlayer1.length, this.shipsPlayer1)) {
+			view.displayMessagePlayer1('You win! You landed all 3 combos in ' + controllerPlayer1.guesses + ' attemps!');
+		} else {
+			view.displayMessagePlayer1('You missed.');
+		}
 		return false;
 	},
 
@@ -179,25 +188,28 @@ var model = {
 			var ship = this.shipsPlayer2[i];
 			var index = ship.locations.indexOf(guess);
 			if (index >= 0) {
-				ship.hits[index] = "hit";
+				ship.hits[index] = 'hit';
 				view.displayHitPlayer2(guess);
-				view.displayMessagePlayer2("HIT!");
+				view.displayMessagePlayer2('HIT!');
 				if (this.isSunk(ship)) {
-					view.displayMessagePlayer2("You completed the combo!");
+					view.displayMessagePlayer2('You completed the combo!');
 					this.shipsPlayer2[i].sunk = true;
 				}
 				return true;
 			}
 		}
 		view.displayMissPlayer2(guess);
-		(this.allShipsSunk(this.shipsPlayer2.length, this.shipsPlayer2)) ? view.displayMessagePlayer2("You win! You landed all 3 combos in " + controllerPlayer2.guesses + " attemps!") :
-									   view.displayMessagePlayer2("You missed.");
+		if (this.allShipsSunk(this.shipsPlayer2.length, this.shipsPlayer2)) {
+			view.displayMessagePlayer2('You win! You landed all 3 combos in ' + controllerPlayer2.guesses + ' attemps!')
+		} else {
+			view.displayMessagePlayer2('You missed.');
+		}
 		return false;
 	},
 
 	isSunk: function(ship) {
 		for (var i = 0; i < this.shipLength; i++) {
-			if (ship.hits[i] !== "hit") {
+			if (ship.hits[i] !== 'hit') {
 				return false;
 			}
 		}
@@ -317,7 +329,7 @@ function parseGuessPlayer2(guess) {
 
 var controllerPlayer1 = {
 
-	pilot: "human",
+	pilot: 'human',
 	guesses: 0,
 
 	processGuessPlayer1: function(guess) {
@@ -328,7 +340,7 @@ var controllerPlayer1 = {
 			}
 			model.firePlayer1(location);
 			if (model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
-				view.displayMessagePlayer1("You win! You landed all 3 combos in " + this.guesses + " attemps!");
+				view.displayMessagePlayer1('You win! You landed all 3 combos in ' + this.guesses + ' attemps!');
 			}
 		}
 	} ,
@@ -396,13 +408,11 @@ var controllerPlayer1 = {
 			return guess;
 		};
 
-		console.log(runThroughs);
-
 		var guess = (this.guesses === 0) ? randomNumber() : educatedGuess();
 		
 		for (var i = 0; i < this.previousGuesses.length; i++) {
 			if (guess === this.previousGuesses[i]) {
-				console.log("Alert! Dumplicate Number!");
+				console.log('Alert! Dumplicate Number!');
 				return this.computerMakeGuess(runThroughs);
 			} // if there is a duplicate number then the computer will make a new guess
 		};
@@ -415,7 +425,7 @@ var controllerPlayer1 = {
 
 var controllerPlayer2 = {
 
-	pilot: "human",
+	pilot: 'human',
 	guesses: 0,
 
 	processGuessPlayer2: function(guess) {
@@ -426,7 +436,7 @@ var controllerPlayer2 = {
 			}
 			model.firePlayer2(location);
 			if (model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
-				view.displayMessagePlayer2("You win! You landed all 3 combos in " + this.guesses + " attemps!");
+				view.displayMessagePlayer2('You win! You landed all 3 combos in ' + this.guesses + ' attemps!');
 			}
 		}
 	},
@@ -494,13 +504,11 @@ var controllerPlayer2 = {
 			return guess;
 		};
 
-		console.log(runThroughs);
-
 		var guess = (this.guesses === 0) ? randomNumber() : educatedGuess();
 		
 		for (var i = 0; i < this.previousGuesses.length; i++) {
 			if (guess === this.previousGuesses[i]) {
-				console.log("Alert! Dumplicate Number!");
+				console.log('Alert! Dumplicate Number!');
 				return this.computerMakeGuess(runThroughs);
 			} // if there is a duplicate number then the computer will make a new guess
 		};
@@ -629,90 +637,92 @@ var controller = {
 
 	playerCPUSelect: function() {
 		$('#human1').on('click', function() {
-			controllerPlayer1.pilot = "human";
-			$('#right').find('td').off('click', player1TurnHuman);
-			$('#left').find('td').off('click', player2TurnHuman);
-			clear();
+			controllerPlayer1.pilot = 'human';
+			controller.clear();
 		});
 		$('#computer1').on('click', function() {
-			controllerPlayer1.pilot = "cpu";
-			$('#right').find('td').off('click', player1TurnHuman);
-			$('#left').find('td').off('click', player2TurnHuman);
-			clear();
+			controllerPlayer1.pilot = 'cpu';
+			controller.clear();
 		});
 		$('#human2').on('click', function() {
-			controllerPlayer2.pilot = "human";
-			$('#right').find('td').off('click', player1TurnHuman);
-			$('#left').find('td').off('click', player2TurnHuman);
-			clear();
+			controllerPlayer2.pilot = 'human';
+			controller.clear();
 		});
 		$('#computer2').on('click', function() {
-			controllerPlayer2.pilot = "cpu";
-			$('#right').find('td').off('click', player1TurnHuman);
-			$('#left').find('td').off('click', player2TurnHuman);
-			clear();
+			controllerPlayer2.pilot = 'cpu';
+			controller.clear();
 		});
-
-		function clear() {
-			$('#start').removeClass('hidden');
-			$('#clear').addClass('hidden');
-			$("#clear").trigger('click');
-		};
 	},
 
-	pressStartGameButton: function() {
-		$('#start').on('click', controller.startGame);
+	clear: function() {
+		switchOff('#right', player1TurnHuman);
+		switchOff('#left', player2TurnHuman);
+		$('#start').removeClass('hidden');
+		$('#clear').addClass('hidden');
+		$('#clear').trigger('click');
+	},
+
+	startCheck: function() {
+		if ($('#left').hasClass('ready') && $('#right').hasClass('ready')) {
+			$('#start').on('click', controller.startGame);
+		}
 	},
 
 	startGame: function() {
-		if (controllerPlayer1.pilot === "human" && controllerPlayer2.pilot === "human") {
-			$('#right').find('td').on('click', player1TurnHuman);
+		if (controllerPlayer1.pilot === 'human' && controllerPlayer2.pilot === 'human') {
 			//$('#right').find('td').on('contextmenu', player1specialMove);
-			$('#left').find('td').on('click', player2TurnHuman);
 			//$('#left').find('td').on('contextmenu', player2specialMove);
-			$('#start').addClass('hidden');
-			$('#clear').removeClass('hidden');
-		} else if (controllerPlayer1.pilot === "human" && controllerPlayer2.pilot === "cpu") {
-			$('#right').find('td').on('click', player1TurnHuman);
+			prepareGame(switchOn, switchOn);
+		} else if (controllerPlayer1.pilot === 'human' && controllerPlayer2.pilot === 'cpu') {
 			//$('#right').find('td').on('contextmenu', player1specialMove);
-			$('#left').find('td').off('click', player2TurnHuman);
 			//$('#left').find('td').off('contextmenu', player2specialMove);
-			$('#start').addClass('hidden');
-			$('#clear').removeClass('hidden');
-		} else if (controllerPlayer1.pilot === "cpu" && controllerPlayer2.pilot === "human") {
-			$('#right').find('td').off('click', player1TurnHuman);
+			prepareGame(switchOn, switchOff);
+		} else if (controllerPlayer1.pilot === 'cpu' && controllerPlayer2.pilot === 'human') {
 			//$('#right').find('td').off('contextmenu', player1specialMove);
-			$('#left').find('td').on('click', player2TurnHuman);
 			//$('#left').find('td').on('contextmenu', player2specialMove);
+			prepareGame(switchOff, switchOn);
+		}
+
+		function prepareGame(callback1, callback2) {
+			callback1('#right', player1TurnHuman);
+			callback2('#left', player2TurnHuman);
 			$('#start').addClass('hidden');
 			$('#clear').removeClass('hidden');
-		}
+		};
 	}
 };
 
+function switchOn(where, func) {
+	$(where).find('td').off('click', func).on('click', func);
+};
+
+function switchOff(where, func) {
+	$(where).find('td').off('click', func);
+};
+
 function player1TurnHuman() {
+	//switchOff('#right', player1TurnHuman);
 	if (!model.allShipsSunk(model.shipsPlayer1.length, model.shipsPlayer1)) {
-		$('#right').find('td').off('click', player1TurnHuman);
+		switchOff('#right', player1TurnHuman);
 		var guess = $(this).attr('id');
 		controllerPlayer1.processGuessPlayer1(guess);
-		if (controllerPlayer2.pilot === "human") {
-			$('#left').find('td').on('click', player2TurnHuman);
-		} else if (controllerPlayer2.pilot === "cpu") {
-			player2TurnCPU();
+		if (controllerPlayer2.pilot === 'human') {
+			switchOn('#left', player2TurnHuman)
+		} else if (controllerPlayer2.pilot === 'cpu') {
+			return player2TurnCPU();
 		}
-		
 	}
 };
 
 function player2TurnHuman() {
 	if (!model.allShipsSunk(model.shipsPlayer2.length, model.shipsPlayer2)) {
-		$('#left').find('td').off('click', player2TurnHuman);
+		switchOff('#left', player2TurnHuman);
 		var guess = $(this).attr('id');
 		controllerPlayer2.processGuessPlayer2(guess);
-		if (controllerPlayer1.pilot === "human") {
-			$('#right').find('td').on('click', player1TurnHuman);
-		} else if (controllerPlayer1.pilot === "cpu") {
-			player1TurnCPU();
+		if (controllerPlayer1.pilot === 'human') {
+			switchOn('#right', player1TurnHuman);
+		} else if (controllerPlayer1.pilot === 'cpu') {
+			return player1TurnCPU();
 		}
 	}
 };
@@ -722,8 +732,8 @@ function player1TurnCPU() {
 	setTimeout(function() {
 		controllerPlayer1.computerMakeGuess(runThroughs);
 	}, 500)
-	if (controllerPlayer2.pilot === "human") {
-		$('#left').find('td').on('click', player2TurnHuman);
+	if (controllerPlayer2.pilot === 'human') {
+		switchOn('#left', player2TurnHuman);
 	} 
 };
 
@@ -732,8 +742,8 @@ function player2TurnCPU() {
 	setTimeout(function() {
 		controllerPlayer2.computerMakeGuess(runThroughs);
 	}, 500)
-	if (controllerPlayer1.pilot === "human") {
-		$('#right').find('td').on('click', player1TurnHuman);
+	if (controllerPlayer1.pilot === 'human') {
+		switchOn('#right', player1TurnHuman);
 	}
 };
 
@@ -741,7 +751,6 @@ window.onload = function() {
 	view.player1CharacterSelectButton();
 	view.player2CharacterSelectButton();
 	controller.playerCPUSelect();
-	controller.pressStartGameButton();
 	view.newGameButton();
 	model.generateShipLocationsPlayer1();
 	model.generateShipLocationsPlayer2();
@@ -755,17 +764,17 @@ window.onload = function() {
 	/*$('#specialMove1').button();
 	$('#specialMove2').button();*/
 
-	view.toggleCharacters("#hDiv2", ['gokuBlue', 'goku'], "#player1CS");
-	view.toggleCharacters("#hDiv4", ['trunks', 'trunksSS'], "#player1CS");
-	view.toggleCharacters("#hDiv5", ['gotenks', 'gotenksSS', 'gotenksSS3'], "#player1CS");
-	view.toggleCharacters("#hDiv7", ['vegeta', 'superVegeta'], "#player1CS");
+	view.toggleCharacters('#hDiv2', ['gokuBlue', 'goku'], '#player1CS');
+	view.toggleCharacters('#hDiv4', ['trunks', 'trunksSS'], '#player1CS');
+	view.toggleCharacters('#hDiv5', ['gotenks', 'gotenksSS', 'gotenksSS3'], '#player1CS');
+	view.toggleCharacters('#hDiv7', ['vegeta', 'superVegeta'], '#player1CS');
 	
-	view.toggleCharacters("#vDiv6", ['black', 'blackRose'], "#player2CS");
-	view.toggleCharacters("#vDiv8", ['kidBuu', 'fatBuu', 'evilBuu', 'superBuu'], "#player2CS");
-	view.toggleCharacters("#vDiv9", ['frost', 'frost3rdForm', 'frostFinalForm'], "#player2CS");
-	view.toggleCharacters("#vDiv10", ['imperfectCell', 'semiPerfectCell', 'cell'], "#player2CS");
-	view.toggleCharacters("#vDiv11", ['frieza', 'goldenFrieza', 'friezaFirstForm'], "#player2CS");
-}
+	view.toggleCharacters('#vDiv6', ['black', 'blackRose'], '#player2CS');
+	view.toggleCharacters('#vDiv8', ['kidBuu', 'fatBuu', 'evilBuu', 'superBuu'], '#player2CS');
+	view.toggleCharacters('#vDiv9', ['frost', 'frost3rdForm', 'frostFinalForm'], '#player2CS');
+	view.toggleCharacters('#vDiv10', ['imperfectCell', 'semiPerfectCell', 'cell'], '#player2CS');
+	view.toggleCharacters('#vDiv11', ['frieza', 'goldenFrieza', 'friezaFirstForm'], '#player2CS');
+};
 
 
 
