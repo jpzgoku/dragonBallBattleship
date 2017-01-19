@@ -1,0 +1,487 @@
+$ssBlue: #00ffff;
+$ssYellow: #ffff00;
+$buuPink: #ff94ce;
+
+body {
+	background-color: black;
+	min-width: 900px;
+}
+ul,
+li {
+	padding: 0;
+	margin: 0;
+}
+ul {
+	position: relative;
+	margin: auto;
+	text-align: center;
+}
+li {
+	display: inline-block;
+	padding: 0 10px;
+	font-family: BlinkMacSystemFont;
+}
+#header {
+
+	margin: 50px 0 25px;
+
+  li {
+  	cursor: default;
+  }
+}
+.menu {
+	background-color: #323232;
+	border-color: #323232;
+	color: white;
+	font-size: 18px;
+}
+#heroSelect,
+#villianSelect {
+
+	width: 960px;
+	position: relative;
+	text-align: center;
+	margin: auto;
+	border-spacing: 0;
+
+   td {
+  	height: 240px;
+  	width: 240px;
+  	box-sizing: border-box;
+  	border: none
+  }
+}
+
+@mixin charSelc($size, $bg-color) {
+	background-size: $size;
+	background-color: $bg-color;
+}
+.goku {
+	background: no-repeat url(../images/gokuEnergy.png);
+	@include charSelc(cover, #e50000);
+}
+.gokuBlue {
+	background: no-repeat url(../images/gokuBlue.png);
+	@include charSelc(cover, $ssBlue);
+}
+.vegeta {
+	background: no-repeat url(../images/vegetaBlue.png);
+	@include charSelc(cover, $ssBlue);
+}
+.superVegeta {
+	background: no-repeat url(../images/superVegeta.png);
+	@include charSelc(cover, $ssYellow);
+}
+.trunks {
+	background: no-repeat url(../images/trunks.png) 100% 0%;
+	@include charSelc(150%, $ssBlue);
+}
+.trunksSS {
+	background: no-repeat url(../images/trunksSS.png);
+	@include charSelc(cover, $ssYellow);
+}
+.beerus {
+	background: no-repeat url(../images/beerus.png);
+	@include charSelc(90%, #885ead);
+}
+.piccolo {
+	background: no-repeat url(../images/piccolo2.png) 50% 0%;
+	@include charSelc(75%, #00ce00);
+}
+.gohan {
+	background: no-repeat url(../images/gohan.png) 100% 100%;
+	@include charSelc(90%, $ssYellow);
+}
+.tien {
+	background: no-repeat url(../images/tien.png);
+	@include charSelc(cover, white);
+}
+.goten {
+	background: no-repeat url(../images/gotenksPose.png);
+	@include charSelc(cover, $ssYellow);
+}
+.gotenks {
+	background: no-repeat url(../images/gotenks.png);
+	@include charSelc(cover, #ffe246);
+}
+.gotenksSS {
+	background: no-repeat url(../images/gotenksSS.png);
+	@include charSelc(cover, $ssYellow);
+}
+.gotenksSS3 {
+	background: no-repeat url(../images/gotenksSS3.png);
+	@include charSelc(cover, $ssYellow);
+}
+.masterRoshi {
+	background: no-repeat url(../images/masterRoshi.png);
+	@include charSelc(cover, orange);
+}
+.krillin {
+	background: no-repeat url(../images/krillin.png);
+	@include charSelc(90%, orange);
+}
+.frieza{
+	background: no-repeat url(../images/frieza.png);
+	@include charSelc(115%, #551a8b);
+}
+.goldenFrieza{
+	background: no-repeat url(../images/goldenFrieza.png);
+	@include charSelc(cover, #ffe76A);
+}
+.friezaFirstForm {
+	background: no-repeat url(../images/friezaFirstForm.png);
+	@include charSelc(cover, #551a8b);
+}
+.black {
+	background: no-repeat url(../images/black.png) 0% 0%;
+	@include charSelc(130%, #6b6b6b);
+}
+.blackRose {
+	background: no-repeat url(../images/blackRose.png);
+	@include charSelc(cover, #ffc0cb);
+}
+.zamasu {
+	background: no-repeat url(../images/zamasu.png) 50% 100%;
+	@include charSelc(90%, #00ff80);
+}
+.babidi {
+	background: no-repeat url(../images/babidi.png);
+	@include charSelc(95%, orange);
+}
+.fatBuu {
+	background: no-repeat url(../images/fatBuu.png) 0% 0%;
+	@include charSelc(120%, $buuPink);
+}
+.evilBuu {
+	background: no-repeat url(../images/evilBuu.png) 0% 25%;
+	@include charSelc(110%, #bdbdbd);
+}
+.superBuu {
+	background: no-repeat url(../images/superBuu2.png) 50% 0%;
+	@include charSelc(85%, $buuPink);
+}
+.kidBuu {
+	background: no-repeat url(../images/kidBuu.png);
+	@include charSelc(cover, $buuPink);
+}
+.cell {
+	background: no-repeat url(../images/cell.png) 0% 10%;
+	@include charSelc(130%, #00ff00);
+}
+.cellJr {
+	background: no-repeat url(../images/cellJr.png);
+	@include charSelc(cover, #48b3e7);
+}
+.semiPerfectCell {
+	background: no-repeat url(../images/semiPerfectCell.png) 60% 10%;
+	@include charSelc(170%, #00e500);
+}
+.imperfectCell {
+	background: no-repeat url(../images/imperfectCell.png);
+	@include charSelc(cover, #00a000);
+}
+.android17 {
+	background: no-repeat url(../images/android17.png);
+	@include charSelc(cover, #ff1919);
+}
+.android18 {
+	background: no-repeat url(../images/android18second.png) ;
+	@include charSelc(80%, #4889d8);
+}
+.android19 {
+	background: no-repeat url(../images/android19.png);
+	@include charSelc(cover, #ffe166);
+}
+.android20 {
+	background: no-repeat url(../images/android20Stare.png);
+	@include charSelc(cover, #ffa500);
+}
+.frost {
+	background: no-repeat url(../images/frostForm1.png);
+	@include charSelc(cover, #e9e9e9);
+}
+.frost3rdForm {
+	background: no-repeat url(../images/frost3rdForm.png);
+	@include charSelc(cover, #e9e9e9);
+}
+.frostFinalForm {
+	background: no-repeat url(../images/frostFinalForm.png) 50% 0%;
+	@include charSelc(90%, #e9e9e9);
+}
+#board {
+	position: relative;
+	width: 90%;
+	margin: 10px auto 30px;
+	text-align: center;
+}
+#messageArea {
+	margin: 40px 0;
+	display: inline-block;
+	width: 40%;
+	height: 48px;
+	font-size: 21px;
+}
+#messageAreaPlayer1 {
+	@extend #messageArea;
+	float: left;
+}
+#messageAreaPlayer2 {
+	@extend #messageArea;
+	float: right;
+}
+.gokuMessageBoard {
+	color: #e50000;
+}
+.gokuBackground {
+	background-color: #e50000;
+}
+.gokuBlueMessageBoard, .vegetaMessageBoard, .trunksMessageBoard {
+	color: $ssBlue;
+}
+.gokuBlueBackground, .vegetaBackground, .trunksBackground {
+	background-color: $ssBlue;
+}
+.beerusMessageBoard {
+	color: #885ead;
+}
+.beerusBackground {
+	background-color: #885ead;
+}
+.piccoloMessageBoard {
+	color: #00ce00;
+}
+.piccoloBackground {
+	background-color: #00ce00;
+}
+.superVegetaMessageBoard, .trunksSSMessageBoard,
+.gohanMessageBoard, .gotenMessageBoard,
+.gotenksSSMessageBoard, .gotenksSS3MessageBoard {
+	color: $ssYellow;
+}
+.superVegetaBackground, .trunksSSBackground,
+.gohanBackground, .gotenBackground,
+.gotenksSSBackground, .gotenksSS3Background {
+	background-color: $ssYellow;
+}
+.gotenksMessageBoard {
+	color: #ffe246;
+}
+.gotenksBackground {
+	background-color: #ffe246;
+}
+.tienMessageBoard {
+	color: white;
+}
+.tienBackground {
+	background-color: white;
+}
+.shenronMessageBoard {
+	color: #00b200;
+}
+.shenronBackground {
+	background-color: #00b200;
+}
+.blackMessageBoard {
+	color: #6b6b6b;
+}
+.blackBackground {
+	background-color: #6b6b6b;
+}
+.blackRoseMessageBoard {
+	color: #ffc0cb;
+}
+.blackRoseBackground {
+	background-color: #ffc0cb;
+}
+.zamasuMessageBoard {
+	color: #00ff80;
+}
+.zamasuBackground {
+	background-color: #00ff80;
+}
+.friezaMessageBoard,
+.friezaFirstFormMessageBoard {
+	color: #551a8b;
+}
+.friezaBackground,
+.friezaFirstFormBackground {
+	background-color: #551a8b;
+}
+.goldenFriezaMessageBoard {
+	color: #ffe76a;
+}
+.goldenFriezaBackground {
+	background-color: #ffe76a;
+}
+.babidiMessageBoard {
+	color: orange;
+}
+.babidiBackground {
+	background-color: orange;
+}
+.evilBuuMessageBoard {
+	color: #bdbdbd;
+}
+.evilBuuBackground {
+	background-color: #bdbdbd;
+}
+.kidBuuMessageBoard, .superBuuMessageBoard, .fatBuuMessageBoard {
+	color: $buuPink;
+}
+.kidBuuBackground, .superBuuBackground, .fatBuuBackground {
+	background-color: $buuPink;
+}
+.cellMessageBoard {
+	color: #00ff00;
+}
+.cellBackground {
+	background-color: #00ff00;
+}
+.semiPerfectCellMessageBoard {
+	color: #00e500;
+}
+.semiPerfectCellBackground {
+	background-color: #00e500;
+}
+.imperfectCellMessageBoard {
+	color: #00a000;
+}
+.imperfectCellBackground {
+	background-color: #00a000;
+}
+.cellJrMessageBoard {
+	color: #48b3e7;
+}
+.cellJrBackground {
+	background-color: #48b3e7;
+}
+.frostMessageBoard,
+.frost3rdFormMessageBoard,
+.frostFinalFormMessageBoard {
+	color: #e9e9e9;
+}
+.frostBackground,
+.frost3rdFormBackground,
+.frostFinalFormBackground {
+	background-color: #e9e9e9;
+}
+.android17MessageBoard {
+	color: #ff1919;
+}
+.android17Background {
+	background-color: #ff1919;
+}
+.android18MessageBoard {
+	color: #4889d8;
+}
+.android18Background {
+	background-color: #4889d8;
+}
+.android19MessageBoard {
+	color: #ffe166;
+}
+.android19Background {
+	background-color: #ffe166;
+}
+.android20MessageBoard {
+	color: #ffa500;
+}
+.android20Background {
+	background-color: #ffa500;
+}
+#bothSides {
+	margin: 0 auto;
+	display: inline-block;
+	border-spacing: 0;
+}
+#left {
+
+	@extend #bothSides;
+
+  td:hover {
+  	background-color: #00e5e5;
+  }
+}
+#right {
+
+	@extend #bothSides;
+
+  td:hover {
+  	background-color: #590059;
+  }
+}
+td {
+	width: 40px;
+	height: 40px;
+	border: 1px solid black;
+	color: transparent;
+	box-sizing: border-box;
+	cursor: default;
+}
+#img {
+	position: fixed;
+	bottom: 0;
+	height: 320px;
+	width: 320px;
+	background-color: transparent;
+}
+#imgPlayer1 {
+	@extend #img;
+	left: -35px;
+}
+#imgPlayer2 {
+	@extend #img;
+	right: -35px;
+}
+/*#specialMove1 {
+	position: fixed;
+	bottom: 350px;
+	left: 40px;
+}
+#specialMove2 {
+	position: fixed;
+	bottom: 350px;
+	right: 40px;
+}*/
+.hidden {
+	display: none;
+}
+.hit {
+	background: url(../images/hit.png) no-repeat center center;
+	background-size: contain;
+}
+.miss {
+	background: url(../images/miss.png) no-repeat center center;
+	background-size: contain;
+}
+.shade {
+	background-color: black;
+}
+@media only screen and (min-width: 0px) {
+	#imgPlayer2 {
+		display: none;
+	}
+}
+@media only screen and (min-width: 900px) {
+	#imgPlayer2 {
+		display: block;
+	}
+}
+@media only screen and (min-width: 1024px) {
+	td {
+		height: 52px;
+		width: 52px;
+	}
+}
+@media only screen and (min-width: 1100px) {
+	td {
+		height: 62px;
+		width: 62px;
+	}
+}
+@media only screen and (min-width: 1200px) {
+	td {
+		height: 75px;
+		width: 75px;
+	}
+}
